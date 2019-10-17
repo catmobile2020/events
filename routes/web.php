@@ -1,0 +1,21 @@
+<?php
+
+use \Illuminate\Support\Facades\Route;
+
+Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
+        Route::group(['prefix'=>'/'],function (){
+            Route::get('/login','AuthController@index')->name('login');
+            Route::post('/login','AuthController@login')->name('login');
+            Route::get('/logout','AuthController@logout')->name('logout');
+        });
+
+        Route::group(['middleware'=>['auth:web']],function (){
+            Route::get('/','HomeController@index')->name('home');
+            Route::get('/profile','ProfileController@index')->name('profile');
+
+            Route::resource('users','UserController');
+            Route::get('users/{user}/destroy','UserController@destroy')->name('users.destroy');
+
+        });
+
+});

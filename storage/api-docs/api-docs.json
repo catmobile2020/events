@@ -1,0 +1,302 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Events System API",
+        "version": "2.0.0"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "register",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "mahmoud"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "01208971865"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "mahmoudnada5050@gmail.com"
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "cairo"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "10th nasr city"
+                    },
+                    {
+                        "name": "pharmacy_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "10th nasr city"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "123456"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "mahmoudnada5050@gmail.com"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "123456"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "logout currently logged in user",
+                "responses": {
+                    "200": {
+                        "description": "Successfully logged out"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "refreshes expired token",
+                "responses": {
+                    "200": {
+                        "description": "token"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/account/me": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get the current logged in user",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/account/update": {
+            "post": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "update My Account",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "mahmoud"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "01208971865"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "mahmoudnada5050@gmail.com"
+                    },
+                    {
+                        "name": "country",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "cairo"
+                    },
+                    {
+                        "name": "address",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "10th nasr city"
+                    },
+                    {
+                        "name": "pharmacy_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "10th nasr city"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/account/update-password": {
+            "post": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "update My Password",
+                "parameters": [
+                    {
+                        "name": "current_password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Model"
+                    },
+                    "400": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {},
+    "securityDefinitions": {
+        "jwt": {
+            "type": "apiKey",
+            "description": "Value: Bearer \\<token\\><br><br>",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
