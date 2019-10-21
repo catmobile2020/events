@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title','Events Users')
+@section('title','Events')
 
 @section('content')
     <div class="main-content">
@@ -8,7 +8,7 @@
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>Events Users</strong></li>
+            <li class="active"><strong>Events</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-12">
@@ -33,9 +33,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>phone</th>
-                                    <th>email</th>
-                                    <th>Status</th>
+                                    <th>time</th>
+                                    <th>contact phone</th>
+                                    <th>contact email</th>
+                                    <th>Address</th>
+                                    <th>Active</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -44,8 +46,10 @@
                                     <tr class="gradeX">
                                         <td>{{$row->iteration}}</td>
                                         <td>{{$row->name}}</td>
-                                        <td>{{$row->phone}}</td>
-                                        <td>{{$row->email}}</td>
+                                        <td>{{\Carbon\Carbon::parse($row->time)->format('Y-m-d h:i A')}}</td>
+                                        <td>{{$row->contact_phone}}</td>
+                                        <td>{{$row->contact_email}}</td>
+                                        <td>{{$row->address}}</td>
                                         <td>
                                             <span class="badge badge-{{ $row->active == 1 ? 'success' : 'danger' }}">{{ $row->active_name}}</span>
                                         </td>
@@ -53,8 +57,8 @@
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a href="{{route('admin.users.edit',['type'=>$row->type,$row->id])}}">Edit</a></li>
-                                                    <li><a href="{{route('admin.users.destroy',['type'=>$row->type,$row->id])}}">Delete</a></li>
+                                                    <li><a href="{{route('admin.events.edit',$row->id)}}">Edit</a></li>
+{{--                                                    <li><a href="{{route('admin.events.destroy',$row->id)}}">Delete</a></li>--}}
                                                 </ul>
                                             </div>
                                         </td>
@@ -66,9 +70,11 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>phone</th>
-                                    <th>email</th>
-                                    <th>Status</th>
+                                    <th>time</th>
+                                    <th>contact phone</th>
+                                    <th>contact email</th>
+                                    <th>Address</th>
+                                    <th>Active</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

@@ -17,7 +17,7 @@ class User extends Authenticatable  implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name','username','phone', 'active', 'email', 'password',
+        'name','username','phone','type', 'active', 'email', 'password',
     ];
 
     /**
@@ -72,6 +72,27 @@ class User extends Authenticatable  implements JWTSubject
         return 'Deactivated';
     }
 
+    public function getTypeNameAttribute()
+    {
+        switch ($this->type)
+        {
+            case 0 :
+                return 'Admin';
+                break;
+            case 1 :
+                return 'Event Owner';
+                break;
+            case 2 :
+                return 'Event Speaker';
+                break;
+            case 3 :
+                return 'Attendee';
+                break;
+            default:
+                return '';
+        }
+    }
+
 
     public function image()
     {
@@ -93,5 +114,10 @@ class User extends Authenticatable  implements JWTSubject
             $this->image()->delete();
         }
         $this->delete();
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
     }
 }

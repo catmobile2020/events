@@ -21,15 +21,29 @@
                 <i class="icon-gauge"></i><span class="title">Dashboard</span>
             </a>
         </li>
-        @if (auth('web')->user()->type == 0)
+        @if (auth()->user()->type == 0)
             <li class="has-sub {{Route::is('admin.users.*') ? 'active' : ''}}">
                 <a href=""><i class="icon-layout"></i><span class="title">Events Owner</span></a>
                 <ul class="nav collapse">
-                    <li class="{{Route::is('admin.users.create') ? 'active' : ''}}"><a href="{{route('admin.users.create')}}"><span class="title">Add New</span></a></li>
-                    <li class="{{Route::is('admin.users.index') ? 'active' : ''}}"><a href="{{route('admin.users.index')}}"><span class="title">Show All</span></a></li>
+                    <li class="{{Route::is('admin.users.create',['type'=>1]) ? 'active' : ''}}"><a href="{{route('admin.users.create',1)}}"><span class="title">Add New</span></a></li>
+                    <li class="{{Route::is('admin.users.index',['type'=>1]) ? 'active' : ''}}"><a href="{{route('admin.users.index',1)}}"><span class="title">Show All</span></a></li>
                 </ul>
             </li>
         @endif
+        <li class="has-sub {{Route::is('admin.users.*') ? 'active' : ''}}">
+            <a href=""><i class="icon-layout"></i><span class="title">Speakers</span></a>
+            <ul class="nav collapse">
+                <li class="{{Route::is('admin.users.create',['type'=>2]) ? 'active' : ''}}"><a href="{{route('admin.users.create',2)}}"><span class="title">Add New</span></a></li>
+                <li class="{{Route::is('admin.users.index',['type'=>2]) ? 'active' : ''}}"><a href="{{route('admin.users.index',2)}}"><span class="title">Show All</span></a></li>
+            </ul>
+        </li>
+        <li class="has-sub {{Route::is('admin.events.*') ? 'active' : ''}}">
+            <a href=""><i class="icon-layout"></i><span class="title">Events</span></a>
+            <ul class="nav collapse">
+                <li class="{{Route::is('admin.events.create') ? 'active' : ''}}"><a href="{{route('admin.events.create')}}"><span class="title">Add New</span></a></li>
+                <li class="{{Route::is('admin.events.index') ? 'active' : ''}}"><a href="{{route('admin.events.index')}}"><span class="title">Show All</span></a></li>
+            </ul>
+        </li>
     </ul>
     <!-- /main navigation -->
 </div>

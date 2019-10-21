@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\LoginRequest;
+use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Resources\AccountResource;
 use App\User;
 use App\Http\Controllers\Controller;
 
@@ -48,27 +50,6 @@ class AuthController extends Controller
      *         type="string",
      *         format="string",
      *         default="mahmoudnada5050@gmail.com",
-     *      ),@SWG\Parameter(
-     *         name="country",
-     *         in="formData",
-     *         required=true,
-     *         type="string",
-     *         format="string",
-     *         default="cairo",
-     *      ),@SWG\Parameter(
-     *         name="address",
-     *         in="formData",
-     *         required=true,
-     *         type="string",
-     *         format="string",
-     *         default="10th nasr city",
-     *      ),@SWG\Parameter(
-     *         name="pharmacy_id",
-     *         in="formData",
-     *         required=true,
-     *         type="string",
-     *         format="string",
-     *         default="10th nasr city",
      *      ),
      *      @SWG\Parameter(
      *         name="password",
@@ -81,22 +62,22 @@ class AuthController extends Controller
      *      @SWG\Response(response=200, description="token"),
      *      @SWG\Response(response=400, description="Unauthorized"),
      * )
+     * @param RegisterRequest $request
+     * @return AccountResource
      */
 
     public function register(RegisterRequest $request)
     {
-        $client = User::create([
+        $user = User::create([
             'name' => $request->name,
-            'username' => $request->phone,
+            'username' => str_replace(' ','-',$request->name).'_'.rand(000,999),
             'phone' => $request->phone,
             'email' => $request->email,
-            'country' => $request->country,
-            'address' => $request->address,
-            'pharmacy_id' => $request->pharmacy_id,
-            'status' => 0,
-            'password' => bcrypt($request->password),
+            'active' => 1,
+            'type' => 3,
+            'password' => $request->password,
         ]);
-        return response()->json(['status'=>true,'message'=>'User created successfully','data'=>$client],200);
+        return AccountResource::make($user);
     }
 
     /**
@@ -137,6 +118,10 @@ class AuthController extends Controller
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        if (!auth()->user()->active) {
+            return response()->json(['error' => 'Account Dis Active Contact With admin'], 401);
         }
 
         return $this->respondWithToken($token);

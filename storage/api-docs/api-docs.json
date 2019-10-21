@@ -38,30 +38,6 @@
                         "default": "mahmoudnada5050@gmail.com"
                     },
                     {
-                        "name": "country",
-                        "in": "formData",
-                        "required": true,
-                        "type": "string",
-                        "format": "string",
-                        "default": "cairo"
-                    },
-                    {
-                        "name": "address",
-                        "in": "formData",
-                        "required": true,
-                        "type": "string",
-                        "format": "string",
-                        "default": "10th nasr city"
-                    },
-                    {
-                        "name": "pharmacy_id",
-                        "in": "formData",
-                        "required": true,
-                        "type": "string",
-                        "format": "string",
-                        "default": "10th nasr city"
-                    },
-                    {
                         "name": "password",
                         "in": "formData",
                         "required": true,
@@ -211,30 +187,6 @@
                         "type": "string",
                         "format": "string",
                         "default": "mahmoudnada5050@gmail.com"
-                    },
-                    {
-                        "name": "country",
-                        "in": "formData",
-                        "required": true,
-                        "type": "string",
-                        "format": "string",
-                        "default": "cairo"
-                    },
-                    {
-                        "name": "address",
-                        "in": "formData",
-                        "required": true,
-                        "type": "string",
-                        "format": "string",
-                        "default": "10th nasr city"
-                    },
-                    {
-                        "name": "pharmacy_id",
-                        "in": "formData",
-                        "required": true,
-                        "type": "string",
-                        "format": "string",
-                        "default": "10th nasr city"
                     }
                 ],
                 "responses": {

@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 
-@section('title','Home Page')
+@section('title','Events Users')
 
 @section('content')
     <div class="main-content">
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>Events Owner</strong></li>
+            <li class="active"><strong>Events Users</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-12">
@@ -29,14 +29,14 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{isset($user->id) ? route('admin.users.update',$user->id) : route('admin.users.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{isset($user->id) ? route('admin.users.update',['type'=>$type,$user->id]) : route('admin.users.store',$type)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @isset($user->id)
                                 @method('PUT')
                             @endisset
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="name">Email address</label>
+                                    <label for="name">Name</label>
                                     <input type="text" name="name" class="form-control" id="name" placeholder="Mahmoud Mohamed" value="{{$user->name}}">
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-8 col-sm-offset-4">
-                                <a href="{{route('admin.users.index')}}" class="btn btn-white">Cancel</a>
+                                <a href="{{route('admin.users.index',$type)}}" class="btn btn-white">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>

@@ -13,8 +13,10 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
             Route::get('/','HomeController@index')->name('home');
             Route::get('/profile','ProfileController@index')->name('profile');
 
-            Route::resource('users','UserController');
-            Route::get('users/{user}/destroy','UserController@destroy')->name('users.destroy');
+            Route::resource('{type}/users','UserController');
+            Route::get('{type}users/{user}/destroy','UserController@destroy')->name('users.destroy');
+
+            Route::resource('events','EventController');
 
         });
 

@@ -27,21 +27,18 @@ class RegisterRequest extends FormRequest
     {
         $roles = [
             'name' => 'required',
-            'country' => 'required',
-            'address' => 'required',
-            'pharmacy_id' => 'required',
         ];
 
         if ($this->routeIs('api.account.update'))
         {
-            $roles +=['phone' => "required|unique:clients,phone,{$this->user()->id}"];
-            $roles +=['email' => "required|unique:clients,email,{$this->user()->id}"];
+            $roles +=['phone' => "required|unique:users,phone,{$this->user()->id}"];
+            $roles +=['email' => "required|unique:users,email,{$this->user()->id}"];
         }
 
         if ($this->routeIs('api.register'))
         {
-            $roles +=['phone' => "required|unique:clients,phone"];
-            $roles +=['email' => "required|unique:clients,email"];
+            $roles +=['phone' => "required|unique:users,phone"];
+            $roles +=['email' => "required|unique:users,email"];
             $roles +=['password' => 'required|min:6'];
         }
         return  $roles;

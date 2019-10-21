@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Resources\AccountResource;
 use App\Order;
 use App\Http\Controllers\Controller;
 use JWTAuth;
@@ -28,7 +29,7 @@ class ProfileController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return AccountResource::make(auth()->user());
     }
 
 
@@ -62,27 +63,6 @@ class ProfileController extends Controller
      *         type="string",
      *         format="string",
      *         default="mahmoudnada5050@gmail.com",
-     *      ),@SWG\Parameter(
-     *         name="country",
-     *         in="formData",
-     *         required=true,
-     *         type="string",
-     *         format="string",
-     *         default="cairo",
-     *      ),@SWG\Parameter(
-     *         name="address",
-     *         in="formData",
-     *         required=true,
-     *         type="string",
-     *         format="string",
-     *         default="10th nasr city",
-     *      ),@SWG\Parameter(
-     *         name="pharmacy_id",
-     *         in="formData",
-     *         required=true,
-     *         type="string",
-     *         format="string",
-     *         default="10th nasr city",
      *      ),
      *
      *      @SWG\Response(response=200, description="token"),
@@ -93,9 +73,9 @@ class ProfileController extends Controller
      */
     public function update(RegisterRequest $request)
     {
-        $user = JWTAuth::authenticate();
+        $user = auth()->user();
         $user->update($request->all());
-        return response()->json(['result' =>$request->all()],200);
+        return AccountResource::make($user);
     }
 
 
@@ -129,17 +109,17 @@ class ProfileController extends Controller
      */
     public function updatePassword(Request $request)
     {
-        $user = JWTAuth::authenticate();
+        $user = auth()->user();
         if (Hash::check($request->current_password,$user->password))
         {
             if ($request->current_password === $request->password)
             {
-                return response()->json(['status'=>200,'message'=>__('translate.same_password')]);
+                return response()->json(['status'=>200,'message'=>'same password']);
             }
-            $user->update(['password'=>bcrypt($request->password)]);
+            $user->update(['password'=>$request->password]);
 
             return AccountResource::make($user);
         }
-        return response()->json(['status'=>400,'message'=>__('translate.wrong_password')]);
+        return response()->json(['status'=>400,'message'=>'wrong password']);
     }
 }
