@@ -25,12 +25,13 @@ class EventRequest extends FormRequest
     {
         $data =[
             'name'=>'required',
-            'time'=>'required',
+            'date'=>'required',
             'desc'=>'required',
             'contact_phone'=>'required',
             'contact_email'=>'required',
             'address'=>'required',
             'have_ticket'=>'required',
+            'is_public'=>'required',
             'map_link'=>'required',
         ];
         if ($this->routeIs('admin.events.update'))

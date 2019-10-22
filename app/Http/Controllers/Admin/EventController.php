@@ -6,15 +6,28 @@ use App\Event;
 use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EventRequest;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
     use UploadImage;
 
-    public function index()
+    public function index(Request $request)
     {
         $user= auth()->user();
-        $rows = $user->events()->paginate(20);
+        if ($user->type == 0)
+        {
+            if ($request->ajax())
+            {
+                $event=Event::findOrfail($request->id);
+                $event->update(['active'=>$request->active]);
+                return 'Change Successfully To '.$event->active_name;
+            }
+            $rows = Event::latest()->paginate(20);
+        }else
+        {
+            $rows = $user->events()->latest()->paginate(20);
+        }
         return view('admin.pages.event.index',compact('rows'));
     }
 
@@ -63,7 +76,7 @@ class EventController extends Controller
 
 //    public function destroy(Event $event)
 //    {
-//        $event->trash();
+//        $event->delete();
 //        return redirect()->route('admin.events.index')->with('message','Done Successfully');
 //    }
 }

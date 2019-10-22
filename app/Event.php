@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $fillable=['name','time','desc','contact_phone','contact_email','address','map_link','active','user_id'];
+    protected $fillable=['name','date','desc','contact_phone','contact_email','address','map_link','active','have_ticket','is_public','user_id'];
 
     public function owner()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault();
     }
 
     public function getActiveNameAttribute()
@@ -46,5 +46,15 @@ class Event extends Model
             $this->image()->delete();
         }
         $this->delete();
+    }
+
+    public function speakers()
+    {
+        return $this->hasMany(Speaker::class);
+    }
+
+    public function talks()
+    {
+        return $this->hasMany(Talk::class);
     }
 }

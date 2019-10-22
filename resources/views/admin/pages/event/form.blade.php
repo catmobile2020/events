@@ -42,8 +42,8 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="time">Event Time</label>
-                                    <input type="datetime-local" name="time" class="form-control" id="time" value="{{$event->time}}">
+                                    <label for="date">Event Date</label>
+                                    <input type="date" name="date" class="form-control" id="date" value="{{$event->date}}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -76,12 +76,21 @@
                                     <input type="text" name="map_link" class="form-control" id="map_link" placeholder="map link" value="{{$event->map_link}}">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label for="email">have ticket</label>
                                     <select class="form-control" name="have_ticket">
                                         <option value="1" {{$event->have_ticket ? 'selected' : ''}}>Yes</option>
                                         <option value="0" {{$event->have_ticket ? '' : 'selected'}}>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="email">Public Event</label>
+                                    <select class="form-control" name="is_public">
+                                        <option value="1" {{$event->is_public ? 'selected' : ''}}>Yes</option>
+                                        <option value="0" {{$event->is_public ? '' : 'selected'}}>No</option>
                                     </select>
                                 </div>
                             </div>

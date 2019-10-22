@@ -16,7 +16,7 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->timestamp('time');
+            $table->date('date');
             $table->text('desc');
             $table->string('contact_phone');
             $table->string('contact_email');
@@ -24,6 +24,7 @@ class CreateEventsTable extends Migration
             $table->text('map_link');
             $table->boolean('active')->default(false);
             $table->boolean('have_ticket')->default(false);
+            $table->boolean('is_public')->default(true);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

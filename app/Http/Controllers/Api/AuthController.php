@@ -74,7 +74,7 @@ class AuthController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'active' => 1,
-            'type' => 3,
+            'type' => 2,
             'password' => $request->password,
         ]);
         return AccountResource::make($user);
@@ -105,6 +105,15 @@ class AuthController extends Controller
      *         format="string",
      *         default="123456",
      *      ),
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="formData",
+     *         required=true,
+     *         type="string",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="string",
+     *         default="1",
+     *      ),
      *      @SWG\Response(response=200, description="token"),
      *      @SWG\Response(response=400, description="Unauthorized"),
      * )
@@ -116,11 +125,18 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if ($request->type == 2)
+        {
+            $guard = 'speakers';
+        }else
+        {
+            $guard = 'api';
+        }
+        if (! $token = auth($guard)->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        if (!auth()->user()->active) {
+        if (!auth($guard)->user()->active) {
             return response()->json(['error' => 'Account Dis Active Contact With admin'], 401);
         }
 

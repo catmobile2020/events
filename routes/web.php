@@ -17,6 +17,9 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
             Route::get('{type}users/{user}/destroy','UserController@destroy')->name('users.destroy');
 
             Route::resource('events','EventController');
+            Route::resource('{event}/speakers','SpeakerController');
+            Route::resource('{event}/talks','TalkController');
+            Route::get('{event}/talks/{talk}/destroy','TalkController@destroy')->name('talks.destroy');
 
         });
 
