@@ -2,6 +2,9 @@
     "swagger": "2.0",
     "info": {
         "title": "Events System API",
+        "contact": {
+            "email": "mahmoudnada5050@gmail.com"
+        },
         "version": "2.0.0"
     },
     "basePath": "/api",
@@ -139,6 +142,51 @@
                     },
                     "400": {
                         "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get events",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get event",
+                "parameters": [
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
                     }
                 },
                 "security": [

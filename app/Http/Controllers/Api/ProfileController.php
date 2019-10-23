@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\AccountResource;
-use App\Order;
 use App\Http\Controllers\Controller;
-use JWTAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

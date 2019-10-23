@@ -4,17 +4,15 @@
     <list default="true" id="58cbddee-832e-4509-99e8-48db7bbf4eff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Admin/EventRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Admin/EventRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/LoginRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_21_144748_create_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_21_144748_create_events_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/event/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/event/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/event/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/event/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/EventResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/EventResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/cors.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/cors.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/api-docs/api-docs.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/api-docs/api-docs.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -196,7 +194,8 @@
       <updated>1571311057525</updated>
       <workItem from="1571311059029" duration="15549000" />
       <workItem from="1571659913363" duration="9645000" />
-      <workItem from="1571732193680" duration="11198000" />
+      <workItem from="1571732193680" duration="11316000" />
+      <workItem from="1571817863316" duration="12109000" />
     </task>
     <servers />
   </component>

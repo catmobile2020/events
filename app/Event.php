@@ -8,7 +8,7 @@ class Event extends Model
 {
     protected $fillable=['name','date','desc','contact_phone','contact_email','address','map_link','active','have_ticket','is_public','user_id'];
 
-    public function owner()
+    public function user()
     {
         return $this->belongsTo(User::class)->withDefault();
     }
@@ -53,8 +53,18 @@ class Event extends Model
         return $this->hasMany(Speaker::class);
     }
 
+    public function activeSpeakers()
+    {
+        return $this->speakers()->where('active','=',1);
+    }
+
     public function talks()
     {
         return $this->hasMany(Talk::class);
+    }
+
+    public function scopeAvailable($q)
+    {
+        return $q->where('active',1)->where('is_public',1);
     }
 }

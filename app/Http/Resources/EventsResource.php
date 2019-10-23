@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventResource extends JsonResource
+class EventsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,10 +23,7 @@ class EventResource extends JsonResource
             'contact_email'=>$this->contact_email,
             'address'=>$this->address,
             'have_ticket'=>(boolean)$this->have_ticket,
-            'active'=>(boolean)$this->active,
-            'is_public'=>(boolean)$this->is_public,
             'owner'=>AccountResource::make($this->user),
-            'speakers'=>SpeakerResource::collection($this->activeSpeakers()->get()),
             'logo'=>$this->logo,
             'cover'=>$this->cover,
         ];

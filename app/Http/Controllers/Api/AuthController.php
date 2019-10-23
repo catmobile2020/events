@@ -124,23 +124,25 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = request(['email', 'password']);
+        $type =$request->type;
 
-        if ($request->type == 2)
+        if ($type == 2)
         {
             $guard = 'speakers';
         }else
         {
             $guard = 'api';
         }
-        if (! $token = auth($guard)->attempt($credentials)) {
+        auth()->shouldUse($guard);
+        if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        if (!auth($guard)->user()->active) {
+        if (!auth()->user()->active) {
             return response()->json(['error' => 'Account Dis Active Contact With admin'], 401);
         }
 
-        return $this->respondWithToken($token);
+        return $this->respondWithToken($token,$type);
     }
 
     /**
@@ -187,11 +189,12 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function respondWithToken($token)
+    protected function respondWithToken($token,$type)
     {
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
+            'auth_type' => $type,
             'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
