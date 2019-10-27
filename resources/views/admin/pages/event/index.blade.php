@@ -42,6 +42,7 @@
                                     <th>Active</th>
                                     <th>Event Speakers</th>
                                     <th>Event Talks</th>
+                                    <th>Event Posts</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -67,6 +68,7 @@
                                         </td>
                                         <td><a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Event Speakers</a></td>
                                         <td><a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Event Talks</a></td>
+                                        <td><a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Event Posts</a></td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
@@ -85,10 +87,12 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>time</th>
-                                    <th>contact phone</th>
-                                    <th>contact email</th>
                                     <th>Address</th>
+                                    <th>Is Public</th>
                                     <th>Active</th>
+                                    <th>Event Speakers</th>
+                                    <th>Event Talks</th>
+                                    <th>Event Posts</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

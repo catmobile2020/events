@@ -30,13 +30,6 @@
                 </ul>
             </li>
         @endif
-{{--        <li class="has-sub {{Route::is('admin.users.*') ? 'active' : ''}}">--}}
-{{--            <a href=""><i class="icon-layout"></i><span class="title">Speakers</span></a>--}}
-{{--            <ul class="nav collapse">--}}
-{{--                <li class="{{Route::is('admin.users.create',['type'=>2]) ? 'active' : ''}}"><a href="{{route('admin.users.create',2)}}"><span class="title">Add New</span></a></li>--}}
-{{--                <li class="{{Route::is('admin.users.index',['type'=>2]) ? 'active' : ''}}"><a href="{{route('admin.users.index',2)}}"><span class="title">Show All</span></a></li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
         <li class="has-sub {{Route::is('admin.events.*') ? 'active' : ''}}">
             <a href=""><i class="icon-layout"></i><span class="title">Events</span></a>
             <ul class="nav collapse">

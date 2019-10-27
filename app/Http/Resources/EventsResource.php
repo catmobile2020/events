@@ -23,6 +23,7 @@ class EventsResource extends JsonResource
             'contact_email'=>$this->contact_email,
             'address'=>$this->address,
             'have_ticket'=>(boolean)$this->have_ticket,
+            'is_public'=>(boolean)$this->is_public,
             'owner'=>AccountResource::make($this->user),
             'logo'=>$this->logo,
             'cover'=>$this->cover,

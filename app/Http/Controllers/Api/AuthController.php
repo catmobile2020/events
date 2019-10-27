@@ -49,7 +49,7 @@ class AuthController extends Controller
      *         required=true,
      *         type="string",
      *         format="string",
-     *         default="mahmoudnada5050@gmail.com",
+     *         default="m.mohamed@cat.com.eg",
      *      ),
      *      @SWG\Parameter(
      *         name="password",
@@ -77,7 +77,8 @@ class AuthController extends Controller
             'type' => 2,
             'password' => $request->password,
         ]);
-        return AccountResource::make($user);
+        $token = auth('api')->login($user);
+        return $this->respondWithToken($token,$user->type);
     }
 
     /**
@@ -95,7 +96,7 @@ class AuthController extends Controller
      *         required=true,
      *         type="string",
      *         format="string",
-     *         default="mahmoudnada5050@gmail.com",
+     *         default="m.mohamed@cat.com.eg",
      *      ),
      *      @SWG\Parameter(
      *         name="password",

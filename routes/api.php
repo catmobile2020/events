@@ -14,7 +14,14 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::post('/update','ProfileController@update')->name('api.account.update');
             Route::post('/update-password','ProfileController@updatePassword');
         });
-        Route::get('/events','EventController@index');
-        Route::get('/events/{event}','EventController@show');
+
+        Route::group(['prefix' => 'events'], function () {
+            Route::get('/','EventController@index');
+            Route::get('/{event}','EventController@show');
+            Route::get('/speakers/{speaker}','EventController@singleSpeaker');
+            Route::get('/{event}/posts','PostController@index');
+            Route::post('/{event}/posts','PostController@store');
+            Route::post('/{event}/posts/{post}/update','PostController@update');
+        });
     });
 });

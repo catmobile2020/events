@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\AccountResource;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SpeakerResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,6 +21,14 @@ class ProfileController extends Controller
      *      security={
      *          {"jwt": {}}
      *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
      *      @SWG\Response(response=200, description="object"),
      * )
      * @param Request $request
@@ -27,6 +36,10 @@ class ProfileController extends Controller
      */
     public function me()
     {
+        if (\request()->header('type') == 2)
+        {
+            return SpeakerResource::make(auth()->user());
+        }
         return AccountResource::make(auth()->user());
     }
 

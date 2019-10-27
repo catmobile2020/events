@@ -67,4 +67,9 @@ class Event extends Model
     {
         return $q->where('active',1)->where('is_public',1);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class,'event_id')->latest();
+    }
 }

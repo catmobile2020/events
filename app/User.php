@@ -83,9 +83,6 @@ class User extends Authenticatable  implements JWTSubject
                 return 'Event Owner';
                 break;
             case 2 :
-                return 'Event Speaker';
-                break;
-            case 3 :
                 return 'Attendee';
                 break;
             default:
@@ -119,5 +116,15 @@ class User extends Authenticatable  implements JWTSubject
     public function events()
     {
         return $this->hasMany(Event::class);
+    }
+
+    public function posts()
+    {
+        return $this->morphMany(Post::class,'postable');
+    }
+
+    public function ownerPosts()
+    {
+        return $this->hasManyThrough(Post::class,Event::class);
     }
 }

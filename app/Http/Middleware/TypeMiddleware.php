@@ -22,7 +22,7 @@ class TypeMiddleware
         {
             $guard = 'api';
         }
-        auth()->shouldUse('speakers');
+        auth()->shouldUse($guard);
         return $next($request);
     }
 }

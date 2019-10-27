@@ -5,7 +5,7 @@
         "contact": {
             "email": "mahmoudnada5050@gmail.com"
         },
-        "version": "2.0.0"
+        "version": "1.0.0"
     },
     "basePath": "/api",
     "paths": {
@@ -38,7 +38,7 @@
                         "required": true,
                         "type": "string",
                         "format": "string",
-                        "default": "mahmoudnada5050@gmail.com"
+                        "default": "m.mohamed@cat.com.eg"
                     },
                     {
                         "name": "password",
@@ -77,7 +77,7 @@
                         "required": true,
                         "type": "string",
                         "format": "string",
-                        "default": "mahmoudnada5050@gmail.com"
+                        "default": "m.mohamed@cat.com.eg"
                     },
                     {
                         "name": "password",
@@ -157,6 +157,16 @@
                     "events"
                 ],
                 "summary": "Get events",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "object"
@@ -177,11 +187,188 @@
                 "summary": "Get event",
                 "parameters": [
                     {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
                         "name": "event",
                         "in": "path",
                         "required": true,
                         "type": "integer",
                         "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/speakers/{speaker}": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get single speaker",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "speaker",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/posts": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get single speaker",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Add new Post To Event",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "desc",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "photo",
+                        "in": "formData",
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/posts/{post}/update": {
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "update Event Post",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "desc",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "photo",
+                        "in": "formData",
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -202,6 +389,16 @@
                     "account"
                 ],
                 "summary": "Get the current logged in user",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "object"

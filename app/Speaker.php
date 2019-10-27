@@ -72,4 +72,9 @@ class Speaker extends Authenticatable  implements JWTSubject
     {
         return $this->hasMany(Talk::class);
     }
+
+    public function posts()
+    {
+        return $this->morphMany(Post::class,'postable');
+    }
 }

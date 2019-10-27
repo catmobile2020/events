@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
  * 		basePath="/api",
  * 		@SWG\Info(
  * 			title="Events System API",
- * 			version="2.0.0",
+ * 			version="1.0.0",
  *      @SWG\Contact(
  *             email="mahmoudnada5050@gmail.com"
  *         ),
