@@ -17,4 +17,9 @@ class Talk extends Model
     {
         return $this->belongsTo(Speaker::class)->withDefault();
     }
+
+    public function feedback()
+    {
+        return $this->morphMany(Feedback::class,'feedbackable');
+    }
 }

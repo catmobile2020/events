@@ -19,9 +19,25 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/','EventController@index');
             Route::get('/{event}','EventController@show');
             Route::get('/speakers/{speaker}','EventController@singleSpeaker');
+
+            Route::post('/{event}/join','EventController@joinToEvent');
+
             Route::get('/{event}/posts','PostController@index');
             Route::post('/{event}/posts','PostController@store');
             Route::post('/{event}/posts/{post}/update','PostController@update');
+
+            Route::post('/{post}/comments','CommentController@store');
+            Route::put('/{post}/comments/{comment}','CommentController@update');
+
+            Route::get('/{event}/feedback','EventController@eventFeedback');
+            Route::post('/{event}/feedback','EventController@storeEventFeedback');
+
+            Route::get('/talks/{talk}/feedback','EventController@talkFeedback');
+            Route::post('/talks/{talk}/feedback','EventController@storeTalkFeedback');
         });
+    });
+    Route::group(['prefix' => 'articles'], function () {
+        Route::get('/','ArticleController@index');
+        Route::get('/{article}','ArticleController@show');
     });
 });

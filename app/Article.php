@@ -4,28 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Article extends Model
 {
-    protected $fillable=['desc','event_id'];
+    protected $fillable=['title','desc','active'];
 
-    public function postable()
+    public function getActiveNameAttribute()
     {
-        return $this->morphTo();
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class,'postable_id');
-    }
-
-    public function speaker()
-    {
-        return $this->belongsTo(Speaker::class,'postable_id');
-    }
-
-    public function event()
-    {
-        return $this->belongsTo(Event::class,'event_id');
+        if ($this->active)
+        {
+            return 'Activated';
+        }
+        return 'Deactivated';
     }
 
     public function image()
@@ -49,10 +38,4 @@ class Post extends Model
         }
         $this->delete();
     }
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
 }

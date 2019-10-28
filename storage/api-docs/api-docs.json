@@ -9,6 +9,51 @@
     },
     "basePath": "/api",
     "paths": {
+        "/articles": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Get articles",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/articles/{article}": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Get Single article",
+                "parameters": [
+                    {
+                        "name": "article",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/auth/register": {
             "post": {
                 "tags": [
@@ -151,6 +196,103 @@
                 ]
             }
         },
+        "/events/{post}/comments": {
+            "post": {
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Add new Comment To Post",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "desc",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{post}/comments/{comment}": {
+            "put": {
+                "tags": [
+                    "comments"
+                ],
+                "summary": "update Comment",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "desc",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "_method:put",
+                        "in": "formData",
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/events": {
             "get": {
                 "tags": [
@@ -232,6 +374,207 @@
                     {
                         "name": "speaker",
                         "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/join": {
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "join event",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/feedback": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get event feedback",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "add event feedback",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "note",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "rate",
+                        "in": "formData",
+                        "description": "3/5",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/talks/{talk}/feedback": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get talk feedback",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "talk",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "add talk feedback",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "talk",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "note",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "rate",
+                        "in": "formData",
+                        "description": "3/5",
                         "required": true,
                         "type": "integer",
                         "format": "integer"

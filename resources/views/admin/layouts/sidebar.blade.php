@@ -29,6 +29,13 @@
                     <li class="{{Route::is('admin.users.index',['type'=>1]) ? 'active' : ''}}"><a href="{{route('admin.users.index',1)}}"><span class="title">Show All</span></a></li>
                 </ul>
             </li>
+            <li class="has-sub {{Route::is('admin.articles.*') ? 'active' : ''}}">
+                <a href=""><i class="icon-layout"></i><span class="title">Articles</span></a>
+                <ul class="nav collapse">
+                    <li class="{{Route::is('admin.articles.create') ? 'active' : ''}}"><a href="{{route('admin.articles.create')}}"><span class="title">Add New</span></a></li>
+                    <li class="{{Route::is('admin.articles.index') ? 'active' : ''}}"><a href="{{route('admin.articles.index')}}"><span class="title">Show All</span></a></li>
+                </ul>
+            </li>
         @endif
         <li class="has-sub {{Route::is('admin.events.*') ? 'active' : ''}}">
             <a href=""><i class="icon-layout"></i><span class="title">Events</span></a>
@@ -37,6 +44,7 @@
                 <li class="{{Route::is('admin.events.index') ? 'active' : ''}}"><a href="{{route('admin.events.index')}}"><span class="title">Show All</span></a></li>
             </ul>
         </li>
+
     </ul>
     <!-- /main navigation -->
 </div>

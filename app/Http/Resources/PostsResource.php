@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class PostsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,6 @@ class PostResource extends JsonResource
         $data =[
             'id'=>$this->id,
             'desc'=>$this->desc,
-            'comments'=>CommentResource::collection($this->comments),
-            'photo'=>$this->photo,
         ];
         if ($this->speaker)
         {

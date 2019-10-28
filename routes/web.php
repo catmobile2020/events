@@ -14,7 +14,7 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
             Route::get('/profile','ProfileController@index')->name('profile');
 
             Route::resource('{type}/users','UserController');
-            Route::get('{type}users/{user}/destroy','UserController@destroy')->name('users.destroy');
+            Route::get('{type}/users/{user}/destroy','UserController@destroy')->name('users.destroy');
 
             Route::resource('events','EventController');
             Route::resource('{event}/speakers','SpeakerController');
@@ -22,6 +22,9 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
             Route::get('{event}/talks/{talk}/destroy','TalkController@destroy')->name('talks.destroy');
 
             Route::resource('{event}/posts','PostController');
+
+            Route::resource('articles','ArticleController');
+            Route::get('articles/{article}/destroy','ArticleController@destroy')->name('articles.destroy');
         });
 
 });

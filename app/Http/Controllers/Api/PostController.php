@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\PostRequest;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\PostsResource;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -46,7 +47,7 @@ class PostController extends Controller
     public function index(Event $event)
     {
         if ($event->active)
-            return PostResource::collection($event->posts()->paginate(5));
+            return PostsResource::collection($event->posts()->paginate(5));
         return response()->json(['data'=>'Event is Not Active Yet !'],402);
 
     }

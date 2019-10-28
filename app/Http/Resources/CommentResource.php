@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PostResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,19 +17,15 @@ class PostResource extends JsonResource
         $data =[
             'id'=>$this->id,
             'desc'=>$this->desc,
-            'comments'=>CommentResource::collection($this->comments),
-            'photo'=>$this->photo,
+            'type'=>$this->user_type,
         ];
-        if ($this->speaker)
+        if ($this->user_type == 'speaker')
         {
-            $data['type'] = 'speaker';
-            $data['user'] = SpeakerResource::make($this->speaker);
+            $data['user'] = SpeakerResource::make($this->owner);
         }else
         {
-            $data['type'] = 'attendee';
-            $data['user'] = AccountResource::make($this->user);
+            $data['user'] = AccountResource::make($this->owner);
         }
-
         return $data;
     }
 }

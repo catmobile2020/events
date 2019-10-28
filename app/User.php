@@ -127,4 +127,9 @@ class User extends Authenticatable  implements JWTSubject
     {
         return $this->hasManyThrough(Post::class,Event::class);
     }
+
+    public function attendeeEvents()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }

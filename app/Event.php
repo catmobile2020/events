@@ -72,4 +72,14 @@ class Event extends Model
     {
         return $this->hasMany(Post::class,'event_id')->latest();
     }
+
+    public function feedback()
+    {
+        return $this->morphMany(Feedback::class,'feedbackable');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
