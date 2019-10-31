@@ -14,20 +14,7 @@ class ArticleController extends Controller
 
     public function index(Request $request)
     {
-        $user= auth()->user();
-        if ($user->type == 0)
-        {
-            if ($request->ajax())
-            {
-                $article=Article::findOrfail($request->id);
-                $article->update(['active'=>$request->active]);
-                return 'Change Successfully To '.$article->active_name;
-            }
-            $rows = Article::latest()->paginate(20);
-        }else
-        {
-            $rows = $user->articles()->latest()->paginate(20);
-        }
+        $rows = Article::latest()->paginate(20);
         return view('admin.pages.article.index',compact('rows'));
     }
 

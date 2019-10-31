@@ -63,4 +63,10 @@ class TalkController extends Controller
         $talk->delete();
         return redirect()->route('admin.talks.index',$event->id)->with('message','Done Successfully');
     }
+
+    public function feedback(Event $event,Talk $talk)
+    {
+        $rows = $talk->feedback()->latest()->paginate(20);
+        return view('admin.pages.event.feedback',compact('rows'));
+    }
 }

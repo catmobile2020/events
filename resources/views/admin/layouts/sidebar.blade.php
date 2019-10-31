@@ -36,6 +36,34 @@
                     <li class="{{Route::is('admin.articles.index') ? 'active' : ''}}"><a href="{{route('admin.articles.index')}}"><span class="title">Show All</span></a></li>
                 </ul>
             </li>
+            <li class="has-sub {{Route::is('admin.banners.*') ? 'active' : ''}}">
+                <a href=""><i class="icon-layout"></i><span class="title">Banners</span></a>
+                <ul class="nav collapse">
+                    <li class="{{Route::is('admin.banners.create') ? 'active' : ''}}"><a href="{{route('admin.banners.create')}}"><span class="title">Add New</span></a></li>
+                    <li class="{{Route::is('admin.banners.index') ? 'active' : ''}}"><a href="{{route('admin.banners.index')}}"><span class="title">Show All</span></a></li>
+                </ul>
+            </li>
+            <li class="has-sub {{Route::is('admin.partnerships.*') ? 'active' : ''}}">
+                <a href=""><i class="icon-layout"></i><span class="title">partnerships</span></a>
+                <ul class="nav collapse">
+                    <li class="{{Route::is('admin.partnerships.create') ? 'active' : ''}}"><a href="{{route('admin.partnerships.create')}}"><span class="title">Add New</span></a></li>
+                    <li class="{{Route::is('admin.partnerships.index') ? 'active' : ''}}"><a href="{{route('admin.partnerships.index')}}"><span class="title">Show All</span></a></li>
+                </ul>
+            </li>
+            <li class="has-sub {{Route::is('admin.sponsors.*') ? 'active' : ''}}">
+                <a href=""><i class="icon-layout"></i><span class="title">sponsors</span></a>
+                <ul class="nav collapse">
+                    <li class="{{Route::is('admin.sponsors.create') ? 'active' : ''}}"><a href="{{route('admin.sponsors.create')}}"><span class="title">Add New</span></a></li>
+                    <li class="{{Route::is('admin.sponsors.index') ? 'active' : ''}}"><a href="{{route('admin.sponsors.index')}}"><span class="title">Show All</span></a></li>
+                </ul>
+            </li>
+            <li class="has-sub {{Route::is('admin.testimonials.*') ? 'active' : ''}}">
+                <a href=""><i class="icon-layout"></i><span class="title">testimonials</span></a>
+                <ul class="nav collapse">
+                    <li class="{{Route::is('admin.testimonials.create') ? 'active' : ''}}"><a href="{{route('admin.testimonials.create')}}"><span class="title">Add New</span></a></li>
+                    <li class="{{Route::is('admin.testimonials.index') ? 'active' : ''}}"><a href="{{route('admin.testimonials.index')}}"><span class="title">Show All</span></a></li>
+                </ul>
+            </li>
         @endif
         <li class="has-sub {{Route::is('admin.events.*') ? 'active' : ''}}">
             <a href=""><i class="icon-layout"></i><span class="title">Events</span></a>

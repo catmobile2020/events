@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title','articles')
+@section('title','partnerships')
 
 @section('content')
     <div class="main-content">
@@ -8,7 +8,7 @@
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>articles</strong></li>
+            <li class="active"><strong>partnerships</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-12">
@@ -35,7 +35,7 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Title</th>
+                                    <th>name</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>
@@ -45,7 +45,7 @@
                                 @foreach($rows as $row)
                                     <tr class="gradeX">
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$row->title}}</td>
+                                        <td>{{$row->name}}</td>
                                         <td>
                                             <select class="form-control changeStatus" name="active" data-id="{{$row->id}}">
                                                 <option value="1" {{$row->active ? 'selected' : ''}}>Yes</option>
@@ -57,8 +57,8 @@
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a href="{{route('admin.articles.edit',$row->id)}}">Edit</a></li>
-                                                    <li><a href="{{route('admin.articles.destroy',$row->id)}}">Delete</a></li>
+                                                    <li><a href="{{route('admin.partnerships.edit',$row->id)}}">Edit</a></li>
+                                                    <li><a href="{{route('admin.partnerships.destroy',$row->id)}}">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -69,7 +69,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Title</th>
+                                    <th>name</th>
                                     <th>Status</th>
                                     <th>Created At</th>
                                     <th>Action</th>

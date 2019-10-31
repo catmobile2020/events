@@ -196,6 +196,51 @@
                 ]
             }
         },
+        "/banners": {
+            "get": {
+                "tags": [
+                    "banners ads"
+                ],
+                "summary": "Get banners",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/banners/{banner}": {
+            "get": {
+                "tags": [
+                    "banners ads"
+                ],
+                "summary": "Get Single banner",
+                "parameters": [
+                    {
+                        "name": "banner",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/events/{post}/comments": {
             "post": {
                 "tags": [
@@ -426,6 +471,83 @@
                 ]
             }
         },
+        "/events/{event}/invite": {
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "invite pepole to event",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/join-by-invitation-code": {
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "join to event invitation code",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "invitation_code",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/events/{event}/feedback": {
             "get": {
                 "tags": [
@@ -575,6 +697,51 @@
                         "name": "rate",
                         "in": "formData",
                         "description": "3/5",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/partnerships": {
+            "get": {
+                "tags": [
+                    "partnerships"
+                ],
+                "summary": "Get partnerships",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/partnerships/{partnership}": {
+            "get": {
+                "tags": [
+                    "partnerships"
+                ],
+                "summary": "Get Single partnership",
+                "parameters": [
+                    {
+                        "name": "partnership",
+                        "in": "path",
                         "required": true,
                         "type": "integer",
                         "format": "integer"
@@ -829,6 +996,96 @@
                     },
                     "400": {
                         "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/sponsors": {
+            "get": {
+                "tags": [
+                    "sponsors"
+                ],
+                "summary": "Get sponsors",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/sponsors/{sponsor}": {
+            "get": {
+                "tags": [
+                    "sponsors"
+                ],
+                "summary": "Get Single sponsor",
+                "parameters": [
+                    {
+                        "name": "sponsor",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/testimonials": {
+            "get": {
+                "tags": [
+                    "testimonials"
+                ],
+                "summary": "Get testimonials",
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/testimonials/{testimonial}": {
+            "get": {
+                "tags": [
+                    "testimonials"
+                ],
+                "summary": "Get Single testimonial",
+                "parameters": [
+                    {
+                        "name": "testimonial",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
                     }
                 },
                 "security": [

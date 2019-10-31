@@ -38,17 +38,19 @@
                                     <th>time</th>
                                     <th>duration</th>
                                     <th>speaker</th>
+                                    <th>Talk Feedback</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($rows as $row)
                                     <tr class="gradeX">
-                                        <td>{{$row->iteration}}</td>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>{{$row->name}}</td>
                                         <td>{{\Carbon\Carbon::parse($row->time)->format('h:i A')}}</td>
                                         <td>{{$row->duration}}</td>
                                         <td>{{$row->speaker->name}}</td>
+                                        <td><a class="btn btn-danger btn-rounded" href="{{route('admin.talks.feedback',['event'=>$row->event_id,$row->id])}}">Talk Feedback</a></td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
@@ -66,9 +68,10 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
-                                    <th>phone</th>
-                                    <th>email</th>
-                                    <th>Status</th>
+                                    <th>time</th>
+                                    <th>duration</th>
+                                    <th>speaker</th>
+                                    <th>Talk Feedback</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

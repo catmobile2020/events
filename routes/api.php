@@ -21,6 +21,8 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/speakers/{speaker}','EventController@singleSpeaker');
 
             Route::post('/{event}/join','EventController@joinToEvent');
+            Route::post('/{event}/invite','EventController@inviteToEvent');
+            Route::post('/{event}/join-by-invitation-code','EventController@joinToEventByCode');
 
             Route::get('/{event}/posts','PostController@index');
             Route::post('/{event}/posts','PostController@store');
@@ -39,5 +41,23 @@ Route::group(['namespace' => 'Api'] ,function (){
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/','ArticleController@index');
         Route::get('/{article}','ArticleController@show');
+    });
+
+    Route::group(['prefix' => 'banners'], function () {
+        Route::get('/','BannerController@index');
+        Route::get('/{banner}','BannerController@show');
+    });
+
+    Route::group(['prefix' => 'sponsors'], function () {
+        Route::get('/','SponsorController@index');
+        Route::get('/{sponsor}','SponsorController@show');
+    });
+    Route::group(['prefix' => 'partnerships'], function () {
+        Route::get('/','PartnershipController@index');
+        Route::get('/{partnership}','PartnershipController@show');
+    });
+    Route::group(['prefix' => 'testimonials'], function () {
+        Route::get('/','TestimonialController@index');
+        Route::get('/{testimonial}','TestimonialController@show');
     });
 });

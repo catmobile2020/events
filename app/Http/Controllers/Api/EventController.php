@@ -9,8 +9,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\EventsResource;
 use App\Http\Resources\FeedbackResource;
 use App\Http\Resources\SpeakerResource;
+use App\Mail\InviteMail;
 use App\Speaker;
 use App\Talk;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -160,6 +163,113 @@ class EventController extends Controller
                 {
                     $user->attendeeEvents()->attach($event->id);
                     return response()->json(['data'=>'Join Successfully'],200);
+                }
+            }
+            return response()->json(['data'=>"You can't Join To This Event . Its Private !"],402);
+        }
+        return response()->json(['data'=>'Event is Not Active Yet !'],402);
+    }
+
+    /**
+     *
+     * @SWG\Post(
+     *      tags={"events"},
+     *      path="/events/{event}/invite",
+     *      summary="invite pepole to event",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="event",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="email",
+     *         in="formData",
+     *         required=true,
+     *         type="string",
+     *         format="string",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Event $event
+     * @return EventResource
+     */
+    public function inviteToEvent(Event $event,Request $request)
+    {
+        $user= auth()->user();
+        if ($event->active)
+        {
+            if ($event->is_public)
+            {
+                try
+                {
+                    $email = $request->email;
+                    Mail::to($email)->send(new InviteMail($event->invitation_code));
+                    return response()->json(['data'=>'Send Invitation Successfully'],200);
+                }catch (\Exception $exception)
+                {
+                    return response()->json(['data'=>'Error Happen Try Again'],200);
+                }
+            }
+            return response()->json(['data'=>"You can't Send Invitation To This Event . Its Private !"],402);
+        }
+        return response()->json(['data'=>'Event is Not Active Yet !'],402);
+    }
+
+    /**
+     *
+     * @SWG\Post(
+     *      tags={"events"},
+     *      path="/events/{event}/join-by-invitation-code",
+     *      summary="join to event invitation code",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="invitation_code",
+     *         in="formData",
+     *         required=true,
+     *         type="string",
+     *         format="string",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     */
+    public function joinToEventByCode(Request $request)
+    {
+        $user= auth()->user();
+        $event =Event::where('invitation_code',$request->invitation_code)->first();
+        if ($event and $event->active)
+        {
+            if ($event->is_public)
+            {
+                if ($user->attendeeEvents()->find($event->id))
+                {
+                    return response()->json(['data'=>'You Already Joined'],200);
+                }else
+                {
+                    $user->attendeeEvents()->attach($event->id);
+                    return EventResource::make($event);
                 }
             }
             return response()->json(['data'=>"You can't Join To This Event . Its Private !"],402);

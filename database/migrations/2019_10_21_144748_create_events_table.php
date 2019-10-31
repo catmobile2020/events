@@ -25,6 +25,7 @@ class CreateEventsTable extends Migration
             $table->boolean('active')->default(false);
             $table->boolean('have_ticket')->default(false);
             $table->boolean('is_public')->default(true);
+            $table->integer('invitation_code')->default(0);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

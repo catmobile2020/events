@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title','articles')
+@section('title','banners')
 
 @section('content')
     <div class="main-content">
@@ -8,7 +8,7 @@
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>articles</strong></li>
+            <li class="active"><strong>banners</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-12">
@@ -57,8 +57,8 @@
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a href="{{route('admin.articles.edit',$row->id)}}">Edit</a></li>
-                                                    <li><a href="{{route('admin.articles.destroy',$row->id)}}">Delete</a></li>
+                                                    <li><a href="{{route('admin.banners.edit',$row->id)}}">Edit</a></li>
+                                                    <li><a href="{{route('admin.banners.destroy',$row->id)}}">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>

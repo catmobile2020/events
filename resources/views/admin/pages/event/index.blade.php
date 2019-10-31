@@ -43,13 +43,14 @@
                                     <th>Event Speakers</th>
                                     <th>Event Talks</th>
                                     <th>Event Posts</th>
+                                    <th>Event Feedback</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($rows as $row)
                                     <tr class="gradeX">
-                                        <td>{{$row->iteration}}</td>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>{{$row->name}}</td>
                                         <td>{{$row->date}}</td>
                                         <td>{{$row->address}}</td>
@@ -69,12 +70,15 @@
                                         <td><a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Event Speakers</a></td>
                                         <td><a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Event Talks</a></td>
                                         <td><a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Event Posts</a></td>
+                                        <td><a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Event Feedback</a></td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
                                                     <li><a href="{{route('admin.events.edit',$row->id)}}">Edit</a></li>
-{{--                                                    <li><a href="{{route('admin.events.destroy',$row->id)}}">Delete</a></li>--}}
+                                                    @if (auth()->user()->type == 0)
+                                                        <li><a href="{{route('admin.events.destroy',$row->id)}}">Delete</a></li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </td>

@@ -42,6 +42,7 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         $inputs = $request->all();
+        $inputs['invitation_code'] = rand(000000,999999);
         $user= auth()->user();
         $event = $user->events()->create($inputs);
         $this->upload($request->logo,$event,'logo');
@@ -74,9 +75,15 @@ class EventController extends Controller
     }
 
 
-//    public function destroy(Event $event)
-//    {
-//        $event->delete();
-//        return redirect()->route('admin.events.index')->with('message','Done Successfully');
-//    }
+    public function destroy(Event $event)
+    {
+        $event->delete();
+        return redirect()->route('admin.events.index')->with('message','Done Successfully');
+    }
+
+    public function feedback(Event $event)
+    {
+        $rows = $event->feedback()->latest()->paginate(20);
+        return view('admin.pages.event.feedback',compact('rows'));
+    }
 }

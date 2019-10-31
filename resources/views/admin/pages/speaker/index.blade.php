@@ -44,7 +44,7 @@
                                 <tbody>
                                 @foreach($rows as $row)
                                     <tr class="gradeX">
-                                        <td>{{$row->iteration}}</td>
+                                        <td>{{$loop->iteration}}</td>
                                         <td>{{$row->name}}</td>
                                         <td>{{$row->phone}}</td>
                                         <td>{{$row->email}}</td>
