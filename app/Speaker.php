@@ -77,4 +77,14 @@ class Speaker extends Authenticatable  implements JWTSubject
     {
         return $this->morphMany(Post::class,'postable');
     }
+
+    public function polls()
+    {
+        return $this->hasMany(Poll::class);
+    }
+
+    public function options()
+    {
+        return $this->belongsToMany(Option::class)->withPivot(['notes']);
+    }
 }

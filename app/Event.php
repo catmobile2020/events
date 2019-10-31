@@ -82,4 +82,9 @@ class Event extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function polls()
+    {
+        return $this->hasManyThrough(Poll::class,Speaker::class);
+    }
 }

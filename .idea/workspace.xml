@@ -4,19 +4,17 @@
     <list default="true" id="58cbddee-832e-4509-99e8-48db7bbf4eff" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Event.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ArticleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ArticleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/EventController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TalkController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TalkController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/EventController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_21_144748_create_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_21_144748_create_events_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/article/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/article/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/event/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/event/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/speaker/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/speaker/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/talk/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/talk/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/user/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/user/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PollController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/PollController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/PollController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Admin/PollRequest.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/PollRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/PollRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/PollResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/PollResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/SpeakerResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/SpeakerResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Poll.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Poll.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Speaker.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Speaker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2019_10_31_113557_create_polls_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_10_31_113557_create_polls_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/api-docs/api-docs.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/api-docs/api-docs.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -208,7 +206,7 @@
       <workItem from="1572336371590" duration="1649000" />
       <workItem from="1572346636910" duration="7408000" />
       <workItem from="1572427945489" duration="2491000" />
-      <workItem from="1572509418772" duration="6291000" />
+      <workItem from="1572509418772" duration="13600000" />
     </task>
     <servers />
   </component>

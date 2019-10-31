@@ -34,6 +34,9 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/{event}/feedback','EventController@eventFeedback');
             Route::post('/{event}/feedback','EventController@storeEventFeedback');
 
+            Route::apiResource('/{event}/polls','PollController');
+            Route::post('/{event}/polls/add-vote','PollController@addVote');
+
             Route::get('/talks/{talk}/feedback','EventController@talkFeedback');
             Route::post('/talks/{talk}/feedback','EventController@storeTalkFeedback');
         });

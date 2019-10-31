@@ -759,6 +759,137 @@
                 ]
             }
         },
+        "/events/{event}/polls": {
+            "get": {
+                "tags": [
+                    "polls"
+                ],
+                "summary": "Get event polls",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "polls"
+                ],
+                "summary": "Add new Poll To Event",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "only Spaker  2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "question",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "answers[]",
+                        "in": "formData",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/polls/add-vote": {
+            "post": {
+                "tags": [
+                    "polls"
+                ],
+                "summary": "Add vote in Poll",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "only Spaker  2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "option_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "notes",
+                        "in": "formData",
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/events/{event}/posts": {
             "get": {
                 "tags": [
