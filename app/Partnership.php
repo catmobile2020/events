@@ -38,4 +38,9 @@ class Partnership extends Model
         }
         $this->delete();
     }
+
+    public function scopeActive($q)
+    {
+        return $q->where('active',1)->latest();
+    }
 }

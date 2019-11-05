@@ -21,7 +21,7 @@ class CommentResource extends JsonResource
         ];
         if ($this->user_type == 'speaker')
         {
-            $data['user'] = SpeakerResource::make($this->owner);
+            $data['user'] = SpeakersResource::make($this->owner);
         }else
         {
             $data['user'] = AccountResource::make($this->owner);

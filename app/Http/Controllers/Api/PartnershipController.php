@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Event;
 use App\Http\Resources\PartnershipResource;
 use App\Partnership;
 use Illuminate\Http\Request;
@@ -13,31 +14,13 @@ class PartnershipController extends Controller
      *
      * @SWG\Get(
      *      tags={"partnerships"},
-     *      path="/partnerships",
-     *      summary="Get partnerships",
-     *      security={
-     *          {"jwt": {}}
-     *      },
-     *      @SWG\Response(response=200, description="object"),
-     * )
-     */
-    public function index()
-    {
-        $partnerships = Partnership::where('active',1)->latest()->paginate(5);
-        return PartnershipResource::collection($partnerships);
-    }
-
-    /**
-     *
-     * @SWG\Get(
-     *      tags={"partnerships"},
-     *      path="/partnerships/{partnership}",
-     *      summary="Get Single partnership",
+     *      path="/events{event}/partnerships",
+     *      summary="Get event partnerships",
      *      security={
      *          {"jwt": {}}
      *      },
      *     @SWG\Parameter(
-     *         name="partnership",
+     *         name="event",
      *         in="path",
      *         required=true,
      *         type="integer",
@@ -45,13 +28,12 @@ class PartnershipController extends Controller
      *      ),
      *      @SWG\Response(response=200, description="object"),
      * )
-     * @param Partnership $partnership
-     * @return PartnershipResource|\Illuminate\Http\JsonResponse
+     * @param Event $event
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function show(Partnership $partnership)
+    public function index(Event $event)
     {
-        if ($partnership->active)
-            return PartnershipResource::make($partnership);
-        return response()->json(['data'=>'Partnership is Not Active Yet !'],402);
+        $sponsors = $event->activePartnerships()->paginate(5);
+        return PartnershipResource::collection($sponsors);
     }
 }

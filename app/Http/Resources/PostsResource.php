@@ -21,7 +21,7 @@ class PostsResource extends JsonResource
         if ($this->speaker)
         {
             $data['type'] = 'speaker';
-            $data['user'] = SpeakerResource::make($this->speaker);
+            $data['user'] = SpeakersResource::make($this->speaker);
         }else
         {
             $data['type'] = 'attendee';

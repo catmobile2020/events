@@ -73,6 +73,16 @@ class Event extends Model
         return $this->hasMany(Post::class,'event_id')->latest();
     }
 
+    public function testimonials()
+    {
+        return $this->hasMany(Testimonial::class)->latest();
+    }
+
+    public function activeTestimonials()
+    {
+        return $this->testimonials()->where('active','=',1);
+    }
+
     public function feedback()
     {
         return $this->morphMany(Feedback::class,'feedbackable');
@@ -86,5 +96,24 @@ class Event extends Model
     public function polls()
     {
         return $this->hasManyThrough(Poll::class,Speaker::class);
+    }
+
+    public function sponsors()
+    {
+        return $this->belongsToMany(Sponsor::class);
+    }
+    public function activeSponsors()
+    {
+        return $this->sponsors()->where('active','=',1);
+    }
+
+    public function partnerships()
+    {
+        return $this->belongsToMany(Partnership::class);
+    }
+
+    public function activePartnerships()
+    {
+        return $this->partnerships()->where('active','=',1);
     }
 }

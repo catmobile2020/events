@@ -14,13 +14,14 @@ class SponsorController extends Controller
 
     public function index(Request $request)
     {
+        $user= auth()->user();
         if ($request->ajax())
         {
-            $sponsor=Sponsor::findOrfail($request->id);
+            $sponsor = Sponsor::findOrfail($request->id);
             $sponsor->update(['active'=>$request->active]);
             return 'Change Successfully To '.$sponsor->active_name;
         }
-        $rows = Sponsor::latest()->paginate(20);
+        $rows = $user->sponsors()->latest()->paginate(20);
         return view('admin.pages.sponsor.index',compact('rows'));
     }
 
@@ -33,8 +34,9 @@ class SponsorController extends Controller
 
     public function store(SponsorRequest $request)
     {
+        $user= auth()->user();
         $inputs = $request->except('photo');
-        $sponsor = Sponsor::create($inputs);
+        $sponsor = $user->sponsors()->create($inputs);
         $this->upload($request->photo,$sponsor);
         return redirect()->route('admin.sponsors.index')->with('message','Done Successfully');
     }

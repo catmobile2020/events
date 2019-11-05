@@ -25,7 +25,7 @@ class AuthController extends Controller
         $row = User::where(function ($q) use ($username){
             $q->where('username',$username)->orWhere('email',$username);
         })->first();
-        if ($row)
+        if ($row and $row->type !=2)
         {
             if ($row->active ==0)
             {

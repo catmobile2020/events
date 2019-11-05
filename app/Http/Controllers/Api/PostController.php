@@ -20,7 +20,7 @@ class PostController extends Controller
      * @SWG\Get(
      *      tags={"events"},
      *      path="/events/{event}/posts",
-     *      summary="Get single speaker",
+     *      summary="Get event posts",
      *      security={
      *          {"jwt": {}}
      *      },
@@ -49,7 +49,50 @@ class PostController extends Controller
         if ($event->active)
             return PostsResource::collection($event->posts()->paginate(5));
         return response()->json(['data'=>'Event is Not Active Yet !'],402);
+    }
 
+    /**
+     *
+     * @SWG\Get(
+     *      tags={"events"},
+     *      path="/events/{event}/posts/{post}",
+     *      summary="Get single post",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="event",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="post",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Event $event
+     * @param Post $post
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function show(Event $event,Post $post)
+    {
+        if ($event->active)
+            return PostResource::make($post);
+        return response()->json(['data'=>'Event is Not Active Yet !'],402);
     }
 
     /**

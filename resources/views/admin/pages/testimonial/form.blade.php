@@ -29,7 +29,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <form action="{{isset($testimonial->id) ? route('admin.testimonials.update',$testimonial->id) : route('admin.testimonials.store')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{isset($testimonial->id) ? route('admin.testimonials.update',[$event->id,$testimonial->id]) : route('admin.testimonials.store',$event->id)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @isset($testimonial->id)
                                 @method('PUT')
@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-8 col-sm-offset-4">
-                                <a href="{{route('admin.testimonials.index')}}" class="btn btn-white">Cancel</a>
+                                <a href="{{route('admin.testimonials.index',$event->id)}}" class="btn btn-white">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>

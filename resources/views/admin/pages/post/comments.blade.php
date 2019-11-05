@@ -1,22 +1,19 @@
 @extends('admin.layouts.master')
 
-@section('title','testimonials')
+@section('title','Comments')
 
 @section('content')
     <div class="main-content">
-        <h1 class="page-title">Event Name : {{$event->name}}</h1>
+        <h1 class="page-title">Data Tables</h1>
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>{{$event->name}} Testimonials</strong></li>
+            <li class="active"><strong>Post : {{$post->desc}}</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h3 class="panel-title">
-                            <a class="btn btn-success btn-rounded" href="{{route('admin.testimonials.create',$event->id)}}">Add Testimonial</a>
-                        </h3>
                         <ul class="panel-tool-options">
                             <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
                             <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
@@ -37,10 +34,8 @@
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Description</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Created At</th>
+                                    <th>Comment</th>
+                                    <th>user name</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -49,20 +44,12 @@
                                     <tr class="gradeX">
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$row->desc}}</td>
-                                        <td>{{$row->name}}</td>
-                                        <td>
-                                            <select class="form-control changeStatus" name="active" data-id="{{$row->id}}">
-                                                <option value="1" {{$row->active ? 'selected' : ''}}>Yes</option>
-                                                <option value="0" {{$row->active ? '' : 'selected'}}>No</option>
-                                            </select>
-                                        </td>
-                                        <td>{{$row->created_at->format('Y-m-d')}}</td>
+                                        <td>{{$row->owner->name . ' ('. $row->user_type.' )'}}</td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a href="{{route('admin.testimonials.edit',[$event->id,$row->id])}}">Edit</a></li>
-                                                    <li><a href="{{route('admin.testimonials.destroy',[$event->id,$row->id])}}">Delete</a></li>
+                                                    <li><a href="{{route('admin.posts.comments.destroy',[$row->post->id,$row->id])}}">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -73,10 +60,8 @@
                                 <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Description</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Created At</th>
+                                    <th>Comment</th>
+                                    <th>user name</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>
@@ -87,23 +72,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('js')
-<script>
-    $(document).on('change','.changeStatus',function () {
-        let  active = $(this).val();
-        let  id = $(this).data('id');
-        $.ajax({
-            data:{id:id,active:active},
-            success:function (result) {
-                $('#statusResult').removeClass('sr-only');
-                $('#statusResult').html(result);
-            },
-            error:function (errors) {
-                console.log(errors);
-            }
-        });
-    });
-</script>
 @endsection

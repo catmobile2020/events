@@ -8,7 +8,7 @@
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>Events</strong></li>
+            <li class="active"><strong>FeedBack</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-12">
@@ -37,6 +37,7 @@
                                     <th>#</th>
                                     <th>Note</th>
                                     <th>Rate (*/5)</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -45,6 +46,14 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$row->note}}</td>
                                         <td>{{$row->rate}}</td>
+                                        <td class="size-80">
+                                            <div class="dropdown">
+                                                <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li><a href="{{route('admin.feedback.delete',$row->id)}}">Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -55,6 +64,7 @@
                                     <th>#</th>
                                     <th>Note</th>
                                     <th>Rate (*/5)</th>
+                                    <th>Action</th>
                                 </tr>
                                 </tr>
                                 </tfoot>

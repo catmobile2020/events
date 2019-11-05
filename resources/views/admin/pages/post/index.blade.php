@@ -39,6 +39,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>user name</th>
+                                    <th>Comments</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -48,6 +49,9 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$row->desc}}</td>
                                         <td>{{$row->user->name}}</td>
+                                        <td>
+                                            <a class="btn btn-info btn-rounded" href="{{route('admin.posts.comments.index',$row->id)}}">Comments</a>
+                                        </td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
@@ -66,6 +70,7 @@
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>user name</th>
+                                    <th>Comments</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

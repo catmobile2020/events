@@ -26,7 +26,10 @@ class EventResource extends JsonResource
             'active'=>(boolean)$this->active,
             'is_public'=>(boolean)$this->is_public,
             'owner'=>AccountResource::make($this->user),
-            'speakers'=>SpeakerResource::collection($this->activeSpeakers()->get()),
+            'speakers'=>SpeakersResource::collection($this->activeSpeakers()->get()),
+            'partnerships'=>PartnershipResource::collection($this->activePartnerships()->get()),
+            'sponsors'=>SponsorResource::collection($this->activeSponsors()->get()),
+            'testimonials'=>TestimonialResource::collection($this->activeTestimonials()->get()),
             'logo'=>$this->logo,
             'cover'=>$this->cover,
         ];

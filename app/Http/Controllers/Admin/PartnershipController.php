@@ -14,13 +14,14 @@ class PartnershipController extends Controller
 
     public function index(Request $request)
     {
+        $user= auth()->user();
         if ($request->ajax())
         {
             $partnership=Partnership::findOrfail($request->id);
             $partnership->update(['active'=>$request->active]);
             return 'Change Successfully To '.$partnership->active_name;
         }
-        $rows = Partnership::latest()->paginate(20);
+        $rows = $user->partnerships()->latest()->paginate(20);
         return view('admin.pages.partnership.index',compact('rows'));
     }
 
@@ -33,8 +34,9 @@ class PartnershipController extends Controller
 
     public function store(PartnershipRequest $request)
     {
+        $user= auth()->user();
         $inputs = $request->except('photo');
-        $partnership = Partnership::create($inputs);
+        $partnership = $user->partnerships()->create($inputs);
         $this->upload($request->photo,$partnership);
         return redirect()->route('admin.partnerships.index')->with('message','Done Successfully');
     }

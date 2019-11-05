@@ -16,7 +16,8 @@ class OptionResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'answer'=>$this->answer,
+            'option'=>$this->answer,
+            'votes'=>VoteResource::collection($this->users),
         ];
     }
 }

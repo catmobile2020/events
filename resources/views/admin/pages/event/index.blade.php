@@ -40,10 +40,7 @@
                                     <th>Address</th>
                                     <th>Is Public</th>
                                     <th>Active</th>
-                                    <th>Event Speakers</th>
-                                    <th>Event Talks</th>
-                                    <th>Event Posts</th>
-                                    <th>Event Feedback</th>
+                                    <th>Event Features</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -67,10 +64,13 @@
                                                 <span class="badge badge-{{ $row->active == 1 ? 'success' : 'danger' }}">{{ $row->active_name}}</span>
                                             @endif
                                         </td>
-                                        <td><a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Event Speakers</a></td>
-                                        <td><a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Event Talks</a></td>
-                                        <td><a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Event Posts</a></td>
-                                        <td><a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Event Feedback</a></td>
+                                        <td>
+                                            <a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Event Speakers</a>
+                                            <a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Event Talks</a>
+                                            <a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Event Posts</a>
+                                            <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Event Feedback</a>
+                                            <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Event Testimonials</a>
+                                        </td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
@@ -79,6 +79,7 @@
                                                     @if (auth()->user()->type == 0)
                                                         <li><a href="{{route('admin.events.destroy',$row->id)}}">Delete</a></li>
                                                     @endif
+                                                    <li><a href="{{route('admin.events.analysis',$row->id)}}">Analysis</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -94,9 +95,7 @@
                                     <th>Address</th>
                                     <th>Is Public</th>
                                     <th>Active</th>
-                                    <th>Event Speakers</th>
-                                    <th>Event Talks</th>
-                                    <th>Event Posts</th>
+                                    <th>Event Features</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

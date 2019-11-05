@@ -17,6 +17,8 @@ class CreatePartnershipsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->boolean('active')->default(true);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

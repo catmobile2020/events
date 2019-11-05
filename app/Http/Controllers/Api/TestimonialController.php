@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Event;
 use App\Http\Resources\TestimonialResource;
 use App\Testimonial;
 use Illuminate\Http\Request;
@@ -13,31 +14,13 @@ class TestimonialController extends Controller
      *
      * @SWG\Get(
      *      tags={"testimonials"},
-     *      path="/testimonials",
-     *      summary="Get testimonials",
-     *      security={
-     *          {"jwt": {}}
-     *      },
-     *      @SWG\Response(response=200, description="object"),
-     * )
-     */
-    public function index()
-    {
-        $testimonials = Testimonial::where('active',1)->latest()->paginate(5);
-        return TestimonialResource::collection($testimonials);
-    }
-
-    /**
-     *
-     * @SWG\Get(
-     *      tags={"testimonials"},
-     *      path="/testimonials/{testimonial}",
-     *      summary="Get Single testimonial",
+     *      path="/events{event}/testimonials",
+     *      summary="Get event testimonials",
      *      security={
      *          {"jwt": {}}
      *      },
      *     @SWG\Parameter(
-     *         name="testimonial",
+     *         name="event",
      *         in="path",
      *         required=true,
      *         type="integer",
@@ -45,13 +28,12 @@ class TestimonialController extends Controller
      *      ),
      *      @SWG\Response(response=200, description="object"),
      * )
-     * @param Testimonial $testimonial
-     * @return \Illuminate\Http\JsonResponse
+     * @param Event $event
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function show(Testimonial $testimonial)
+    public function index(Event $event)
     {
-        if ($testimonial->active)
-            return TestimonialResource::make($testimonial);
-        return response()->json(['data'=>'Testimonial is Not Active Yet !'],402);
+        $testimonials = $event->activeTestimonials()->paginate(5);
+        return TestimonialResource::collection($testimonials);
     }
 }

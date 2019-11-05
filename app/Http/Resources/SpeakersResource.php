@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SpeakerResource extends JsonResource
+class SpeakersResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -20,9 +20,7 @@ class SpeakerResource extends JsonResource
             'phone'=>$this->phone,
             'email'=>$this->email,
             'bio'=>$this->bio,
-            'talks'=>TalkResource::collection($this->talks),
             'photo'=>$this->photo,
-            'event'=>EventsResource::make($this->event),
         ];
     }
 }

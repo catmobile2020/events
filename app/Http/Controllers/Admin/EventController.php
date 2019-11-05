@@ -6,6 +6,8 @@ use App\Event;
 use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EventRequest;
+use App\Partnership;
+use App\Sponsor;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -35,7 +37,9 @@ class EventController extends Controller
     public function create()
     {
         $event = new Event;
-        return view('admin.pages.event.form',compact('event'));
+        $sponsors = Sponsor::active()->get();
+        $partnerships = Partnership::active()->get();
+        return view('admin.pages.event.form',compact('event','sponsors','partnerships'));
     }
 
 
@@ -45,6 +49,8 @@ class EventController extends Controller
         $inputs['invitation_code'] = rand(000000,999999);
         $user= auth()->user();
         $event = $user->events()->create($inputs);
+        $event->sponsors()->attach($request->sponsor_ids);
+        $event->partnerships()->attach($request->partnership_ids);
         $this->upload($request->logo,$event,'logo');
         $this->upload($request->cover,$event,'cover');
         return redirect()->route('admin.events.index')->with('message','Done Successfully');
@@ -59,7 +65,9 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('admin.pages.event.form',compact('event'));
+        $sponsors = Sponsor::active()->get();
+        $partnerships = Partnership::active()->get();
+        return view('admin.pages.event.form',compact('event','sponsors','partnerships'));
     }
 
 
@@ -67,6 +75,8 @@ class EventController extends Controller
     {
         $inputs = $request->all();
         $event->update($inputs);
+        $event->sponsors()->sync($request->sponsor_ids);
+        $event->partnerships()->sync($request->partnership_ids);
         if ($request->logo)
             $this->upload($request->logo,$event,'logo',true);
         if ($request->cover)
@@ -85,5 +95,22 @@ class EventController extends Controller
     {
         $rows = $event->feedback()->latest()->paginate(20);
         return view('admin.pages.event.feedback',compact('rows'));
+    }
+
+    public function analysis(Event $event)
+    {
+       $num_attendees = $event->users;
+       $num_speakers = $event->speakers;
+       $num_active_speakers = $event->activeSpeakers;
+       $num_talks = $event->talks;
+       $num_sponsors = 1;
+       $num_partnerships = 1;
+       $num_posts = $event->posts;
+       $num_comments = 1;
+       $num_feedback = $event->feedback;
+       $num_polls = 1;
+        return view('admin.pages.event.analysis',compact('num_attendees','num_speakers','num_active_speakers','num_talks','num_sponsors',
+            'num_partnerships','num_posts','num_comments','num_feedback','num_polls'
+        ));
     }
 }

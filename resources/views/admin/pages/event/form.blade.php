@@ -94,6 +94,26 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <h2 class="text-center">Sponsors</h2>
+                                @foreach($sponsors as $sponsor)
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="sponsor_ids[]" class="form-control" {{in_array($sponsor->id,$event->sponsors()->pluck('id')->toArray()) ? 'checked' : ''}} value="{{$sponsor->id}}">{{$sponsor->name}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="row">
+                                <h2 class="text-center">Partnerships</h2>
+                                @foreach($partnerships as $partnership)
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="partnership_ids[]" class="form-control" {{in_array($partnership->id,$event->partnerships()->pluck('id')->toArray()) ? 'checked' : ''}} value="{{$partnership->id}}">{{$partnership->name}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="logo">Event Logo</label>

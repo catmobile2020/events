@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Event;
+use App\Feedback;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TalkRequest;
 use App\Speaker;
@@ -68,5 +69,11 @@ class TalkController extends Controller
     {
         $rows = $talk->feedback()->latest()->paginate(20);
         return view('admin.pages.event.feedback',compact('rows'));
+    }
+
+    public function deleteFeedback(Feedback $feedback)
+    {
+        $feedback->delete();
+        return redirect()->back()->with('message','Done Successfully');
     }
 }

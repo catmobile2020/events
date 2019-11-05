@@ -137,4 +137,15 @@ class User extends Authenticatable  implements JWTSubject
     {
         return $this->belongsToMany(Option::class)->withPivot(['notes']);
     }
+
+    public function sponsors()
+    {
+        return $this->hasMany(Sponsor::class);
+    }
+
+    public function partnerships()
+    {
+        return $this->hasMany(Partnership::class);
+    }
+
 }

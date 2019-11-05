@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Event;
 use App\Http\Resources\SponsorResource;
 use App\Sponsor;
 use Illuminate\Http\Request;
@@ -13,31 +14,13 @@ class SponsorController extends Controller
      *
      * @SWG\Get(
      *      tags={"sponsors"},
-     *      path="/sponsors",
-     *      summary="Get sponsors",
-     *      security={
-     *          {"jwt": {}}
-     *      },
-     *      @SWG\Response(response=200, description="object"),
-     * )
-     */
-    public function index()
-    {
-        $sponsors = Sponsor::where('active',1)->latest()->paginate(5);
-        return SponsorResource::collection($sponsors);
-    }
-
-    /**
-     *
-     * @SWG\Get(
-     *      tags={"sponsors"},
-     *      path="/sponsors/{sponsor}",
-     *      summary="Get Single sponsor",
+     *      path="/events{event}/sponsors",
+     *      summary="Get event sponsors",
      *      security={
      *          {"jwt": {}}
      *      },
      *     @SWG\Parameter(
-     *         name="sponsor",
+     *         name="event",
      *         in="path",
      *         required=true,
      *         type="integer",
@@ -45,13 +28,12 @@ class SponsorController extends Controller
      *      ),
      *      @SWG\Response(response=200, description="object"),
      * )
-     * @param Sponsor $sponsor
-     * @return \Illuminate\Http\JsonResponse
+     * @param Event $event
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function show(Sponsor $sponsor)
+    public function index(Event $event)
     {
-        if ($sponsor->active)
-            return SponsorResource::make($sponsor);
-        return response()->json(['data'=>'Sponsor is Not Active Yet !'],402);
+        $sponsors = $event->activeSponsors()->paginate(5);
+        return SponsorResource::collection($sponsors);
     }
 }

@@ -714,12 +714,42 @@
                 ]
             }
         },
-        "/partnerships": {
+        "/events/custom/search": {
             "get": {
                 "tags": [
-                    "partnerships"
+                    "events"
                 ],
-                "summary": "Get partnerships",
+                "summary": "search in events",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "date_from",
+                        "in": "query",
+                        "description": "2019-10-22",
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "date_to",
+                        "in": "query",
+                        "description": "2019-10-22",
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "object"
@@ -895,7 +925,7 @@
                 "tags": [
                     "events"
                 ],
-                "summary": "Get single speaker",
+                "summary": "Get event posts",
                 "parameters": [
                     {
                         "name": "type",
@@ -956,6 +986,48 @@
                         "name": "photo",
                         "in": "formData",
                         "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/posts/{post}": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get single post",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
                     }
                 ],
                 "responses": {
@@ -1136,24 +1208,6 @@
                 ]
             }
         },
-        "/sponsors": {
-            "get": {
-                "tags": [
-                    "sponsors"
-                ],
-                "summary": "Get sponsors",
-                "responses": {
-                    "200": {
-                        "description": "object"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
         "/sponsors/{sponsor}": {
             "get": {
                 "tags": [
@@ -1181,33 +1235,15 @@
                 ]
             }
         },
-        "/testimonials": {
+        "/events{event}/testimonials": {
             "get": {
                 "tags": [
                     "testimonials"
                 ],
-                "summary": "Get testimonials",
-                "responses": {
-                    "200": {
-                        "description": "object"
-                    }
-                },
-                "security": [
-                    {
-                        "jwt": []
-                    }
-                ]
-            }
-        },
-        "/testimonials/{testimonial}": {
-            "get": {
-                "tags": [
-                    "testimonials"
-                ],
-                "summary": "Get Single testimonial",
+                "summary": "Get event testimonials",
                 "parameters": [
                     {
-                        "name": "testimonial",
+                        "name": "event",
                         "in": "path",
                         "required": true,
                         "type": "integer",

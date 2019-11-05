@@ -15,10 +15,8 @@ class VoteResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
-            'option_id'=>$this->option_id,
-            'user_id'=>$this->user_id,
-            'notes'=>$this->notes,
+            'user'=>AccountResource::make($this),
+            'notes'=>$this->pivot->notes,
         ];
     }
 }

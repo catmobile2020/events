@@ -311,7 +311,7 @@ class EventController extends Controller
     {
         if ($event->active)
         {
-            $feedback = $event->feedback()->paginate();
+            $feedback = $event->feedback()->paginate(5);
             return FeedbackResource::collection($feedback);
         }
         return response()->json(['data'=>'Event is Not Active Yet !'],402);
@@ -403,7 +403,7 @@ class EventController extends Controller
      */
     public function talkFeedback(Talk $talk)
     {
-        $feedback = $talk->feedback()->paginate();
+        $feedback = $talk->feedback()->paginate(5);
         return FeedbackResource::collection($feedback);
     }
 
@@ -456,6 +456,68 @@ class EventController extends Controller
     {
         $feedback = $talk->feedback()->create($request->all());
         return FeedbackResource::make($feedback);
+    }
+
+    /**
+     *
+     * @SWG\Get(
+     *      tags={"events"},
+     *      path="/events/custom/search",
+     *      summary="search in events",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="query",
+     *         type="string",
+     *         format="string",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="date_from",
+     *         in="query",
+     *         description="2019-10-22",
+     *         type="string",
+     *         format="string",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="date_to",
+     *         in="query",
+     *         description="2019-10-22",
+     *         type="string",
+     *         format="string",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Request $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function customSearch(Request $request)
+    {
+//        return response()->json($request->all());
+        $events = Event::available()->latest()->with('user','activeSpeakers');
+        if ($request->name)
+        {
+            $events = $events->where('name','like','%'.$request->name.'%');
+        }
+        if ($request->date_from)
+        {
+            $events = $events->where('date','>=',$request->date_from);
+        }
+        if ($request->date_to)
+        {
+            $events = $events->where('date','<=',$request->date_to);
+        }
+        $events = $events->paginate(5);
+        return EventsResource::collection($events);
     }
 
 }

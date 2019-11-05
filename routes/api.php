@@ -25,6 +25,7 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::post('/{event}/join-by-invitation-code','EventController@joinToEventByCode');
 
             Route::get('/{event}/posts','PostController@index');
+            Route::get('/{event}/posts/{post}','PostController@show');
             Route::post('/{event}/posts','PostController@store');
             Route::post('/{event}/posts/{post}/update','PostController@update');
 
@@ -34,12 +35,19 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/{event}/feedback','EventController@eventFeedback');
             Route::post('/{event}/feedback','EventController@storeEventFeedback');
 
+            Route::get('/{event}/testimonials','TestimonialController@index');
+            Route::get('/{event}/sponsors','SponsorController@index');
+            Route::get('/{event}/partnerships','PartnershipController@index');
+
             Route::apiResource('/{event}/polls','PollController');
             Route::post('/{event}/polls/add-vote','PollController@addVote');
 
             Route::get('/talks/{talk}/feedback','EventController@talkFeedback');
             Route::post('/talks/{talk}/feedback','EventController@storeTalkFeedback');
+
+            Route::get('/custom/search','EventController@customSearch');
         });
+
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/','ArticleController@index');
@@ -51,16 +59,4 @@ Route::group(['namespace' => 'Api'] ,function (){
         Route::get('/{banner}','BannerController@show');
     });
 
-    Route::group(['prefix' => 'sponsors'], function () {
-        Route::get('/','SponsorController@index');
-        Route::get('/{sponsor}','SponsorController@show');
-    });
-    Route::group(['prefix' => 'partnerships'], function () {
-        Route::get('/','PartnershipController@index');
-        Route::get('/{partnership}','PartnershipController@show');
-    });
-    Route::group(['prefix' => 'testimonials'], function () {
-        Route::get('/','TestimonialController@index');
-        Route::get('/{testimonial}','TestimonialController@show');
-    });
 });

@@ -18,14 +18,27 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
 
             Route::resource('events','EventController');
             Route::get('events/{event}/destroy','EventController@destroy')->name('events.destroy')->middleware('admin');
+            Route::get('events/{event}/analysis','EventController@analysis')->name('events.analysis');
             Route::get('events/{event}/feedback','EventController@feedback')->name('events.feedback');
 
             Route::resource('{event}/speakers','SpeakerController');
             Route::resource('{event}/talks','TalkController');
             Route::get('{event}/talks/{talk}/destroy','TalkController@destroy')->name('talks.destroy');
             Route::get('{event}/talks/{talk}/feedback','TalkController@feedback')->name('talks.feedback');
+            Route::get('feedback/{feedback}','TalkController@deleteFeedback')->name('feedback.delete');
 
             Route::resource('{event}/posts','PostController');
+            Route::get('{post}/comments','PostController@comments')->name('posts.comments.index');
+            Route::get('{post}/comments/{comment}','PostController@deleteComment')->name('posts.comments.destroy');
+
+            Route::resource('sponsors','SponsorController');
+            Route::get('sponsors/{sponsor}/destroy','SponsorController@destroy')->name('sponsors.destroy');
+
+            Route::resource('partnerships','PartnershipController');
+            Route::get('partnerships/{partnership}/destroy','PartnershipController@destroy')->name('partnerships.destroy');
+
+            Route::resource('{event}/testimonials','TestimonialController');
+            Route::get('{event}/testimonials/{testimonial}/destroy','TestimonialController@destroy')->name('testimonials.destroy');
 
             Route::group(['middleware'=>'admin'],function (){
                 Route::resource('articles','ArticleController');
@@ -34,14 +47,6 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
                 Route::resource('banners','BannerController');
                 Route::get('banners/{banner}/destroy','BannerController@destroy')->name('banners.destroy');
 
-                Route::resource('partnerships','PartnershipController');
-                Route::get('partnerships/{partnership}/destroy','PartnershipController@destroy')->name('partnerships.destroy');
-
-                Route::resource('sponsors','SponsorController');
-                Route::get('sponsors/{sponsor}/destroy','SponsorController@destroy')->name('sponsors.destroy');
-
-                Route::resource('testimonials','TestimonialController');
-                Route::get('testimonials/{testimonial}/destroy','TestimonialController@destroy')->name('testimonials.destroy');
             });
 
         });

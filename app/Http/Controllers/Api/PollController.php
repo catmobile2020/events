@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Event;
 use App\Http\Requests\Api\PollRequest;
 use App\Http\Resources\PollResource;
-use App\Http\Resources\VoteResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Swagger\Annotations as SWG;
@@ -159,9 +158,12 @@ class PollController extends Controller
         if ($event->active)
         {
             $user= auth()->user();
-//            return response()->json(['data'=>$user],402);
-            $poll = $user->options()->sync($request->only(['option_id','notes']));
-            return  VoteResource::make($poll);
+            if ($user->options()->find($request->option_id))
+            {
+                $user->options()->detach($request->option_id);
+            }
+            $user->options()->attach($request->option_id,['notes'=>$request->notes]);
+            return response()->json(['data'=>'send Successfully'],200);
         }
         return response()->json(['data'=>'Event is Not Active Yet !'],402);
     }

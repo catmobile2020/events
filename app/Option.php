@@ -12,4 +12,9 @@ class Option extends Model
     {
         return $this->belongsTo(Poll::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withPivot(['notes']);
+    }
 }

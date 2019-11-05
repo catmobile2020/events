@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Comment;
 use App\Event;
 use App\Helpers\UploadImage;
 use App\Http\Requests\Admin\PostRequest;
@@ -14,8 +15,7 @@ class PostController extends Controller
 
     public function index(Event $event)
     {
-        $user= auth()->user();
-        $rows = $user->posts()->latest()->paginate(20);
+        $rows = $event->posts()->latest()->paginate(20);
         return view('admin.pages.post.index',compact('rows','event'));
     }
 
@@ -57,5 +57,17 @@ class PostController extends Controller
     {
         $post->trash();
         return redirect()->route('admin.posts.index',$event->id)->with('message','Done Successfully');
+    }
+
+    public function comments(Post $post)
+    {
+        $rows = $post->comments()->paginate(20);
+        return view('admin.pages.post.comments',compact('rows','post'));
+    }
+
+    public function deleteComment(Post $post,Comment $comment)
+    {
+        $comment->delete();
+        return redirect()->route('admin.posts.comments.index',$post->id)->with('message','Done Successfully');
     }
 }

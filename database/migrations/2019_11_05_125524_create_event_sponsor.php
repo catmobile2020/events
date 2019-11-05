@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestimonialsTable extends Migration
+class CreateEventSponsor extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateTestimonialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('testimonials', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('desc')->nullable();
-            $table->string('name')->nullable();
-            $table->boolean('active')->default(true);
+        Schema::create('event_sponsor', function (Blueprint $table) {
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')->references('id')->on('events');
-            $table->timestamps();
+            $table->unsignedInteger('sponsor_id');
+            $table->foreign('sponsor_id')->references('id')->on('sponsors');
         });
     }
 
@@ -31,6 +28,6 @@ class CreateTestimonialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonials');
+        Schema::dropIfExists('event_sponsor');
     }
 }
