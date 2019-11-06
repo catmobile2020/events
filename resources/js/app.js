@@ -29,5 +29,21 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    created: function () {
+
+        window.Echo.channel('question-channel.1')
+            .listen('.question_event', (e) => {
+                console.log(e);
+        });
+        window.Echo.channel('post-channel.2')
+            .listen('.post_event', (e) => {
+                console.log(e);
+        });
+        window.Echo.channel('comment-channel.9')
+            .listen('.comment_event', (e) => {
+                console.log(e);
+        });
+    }
 });
+

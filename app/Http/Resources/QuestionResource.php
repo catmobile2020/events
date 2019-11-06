@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SpeakersResource extends JsonResource
+class QuestionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,9 @@ class SpeakersResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'name'=>$this->name,
-            'phone'=>$this->phone,
-            'email'=>$this->email,
-            'bio'=>$this->bio,
-            'photo'=>$this->photo,
-            'enable_questions'=>(boolean)$this->enable_questions,
+            'question'=>$this->question,
+            'was_answered'=>(boolean)$this->was_answered,
+            'attendee'=>AccountResource::make($this->user),
         ];
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Event;
+use App\Events\PostEvent;
 use App\Helpers\UploadImage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\PostRequest;
+use App\Http\Resources\AccountResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostsResource;
+use App\Http\Resources\SpeakersResource;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -147,6 +150,23 @@ class PostController extends Controller
                 $post = $user->posts()->create($inputs);
                 if ($request->photo)
                     $this->upload($request->photo,$post);
+
+                $data = [
+                    'event_id' =>$post->event_id,
+                    'desc'=>$post->desc,
+                    'photo' =>$post->photo,
+                ];
+                if ($post->speaker)
+                {
+                    $data['type'] = 'speaker';
+                    $data['user'] = SpeakersResource::make($post->speaker);
+                }else
+                {
+                    $data['type'] = 'attendee';
+                    $data['user'] = AccountResource::make($post->user);
+                }
+                broadcast(new PostEvent($data));
+
                 return  PostResource::make($post);
             }
         return response()->json(['data'=>'Event is Not Active Yet !'],402);

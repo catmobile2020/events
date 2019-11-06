@@ -22,6 +22,7 @@ class SpeakerResource extends JsonResource
             'bio'=>$this->bio,
             'talks'=>TalkResource::collection($this->talks),
             'photo'=>$this->photo,
+            'enable_questions'=>(boolean)$this->enable_questions,
             'event'=>EventsResource::make($this->event),
         ];
     }

@@ -48,6 +48,9 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/custom/search','EventController@customSearch');
         });
 
+        Route::get('/{speaker}/questions','LiveController@questions');
+        Route::post('/live/{speaker}/questions','LiveController@sendQuestion');
+
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/','ArticleController@index');

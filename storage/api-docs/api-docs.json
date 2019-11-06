@@ -762,15 +762,92 @@
                 ]
             }
         },
-        "/partnerships/{partnership}": {
+        "/{speaker}/questions": {
+            "get": {
+                "tags": [
+                    "questions"
+                ],
+                "summary": "Get speaker questions",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "speaker",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/live/{speaker}/questions": {
+            "post": {
+                "tags": [
+                    "questions"
+                ],
+                "summary": "Get speaker questions",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "speaker",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "question",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events{event}/partnerships": {
             "get": {
                 "tags": [
                     "partnerships"
                 ],
-                "summary": "Get Single partnership",
+                "summary": "Get event partnerships",
                 "parameters": [
                     {
-                        "name": "partnership",
+                        "name": "event",
                         "in": "path",
                         "required": true,
                         "type": "integer",
@@ -1208,15 +1285,15 @@
                 ]
             }
         },
-        "/sponsors/{sponsor}": {
+        "/events{event}/sponsors": {
             "get": {
                 "tags": [
                     "sponsors"
                 ],
-                "summary": "Get Single sponsor",
+                "summary": "Get event sponsors",
                 "parameters": [
                     {
-                        "name": "sponsor",
+                        "name": "event",
                         "in": "path",
                         "required": true,
                         "type": "integer",

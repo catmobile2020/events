@@ -1,3 +1,5 @@
+<script src="{{asset('js/app.js')}}"></script>
+
 <!--Load JQuery-->
 <script src="{{asset('assets/admin/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/bootstrap.min.js')}}"></script>

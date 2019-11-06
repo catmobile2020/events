@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Comment;
+use App\Events\CommentEvent;
 use App\Http\Requests\Api\CommentRequest;
 use App\Http\Resources\AccountResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\SpeakersResource;
 use App\Post;
 use App\Http\Controllers\Controller;
 
@@ -68,6 +70,20 @@ class CommentController extends Controller
                 $inputs['user_type'] = 'attendee';
             }
             $comment = $post->comments()->create($inputs);
+
+            $data = [
+                'post_id' =>$comment->post_id,
+                'desc'=>$comment->desc,
+                'type'=>$comment->user_type,
+            ];
+            if ($post->speaker)
+            {
+                $data['user'] = SpeakersResource::make($post->speaker);
+            }else
+            {
+                $data['user'] = AccountResource::make($post->user);
+            }
+            broadcast(new CommentEvent($data));
             return  CommentResource::make($comment);
         }
         return response()->json(['data'=>'Event is Not Active Yet !'],402);

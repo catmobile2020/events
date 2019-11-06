@@ -87,4 +87,9 @@ class Speaker extends Authenticatable  implements JWTSubject
     {
         return $this->belongsToMany(Option::class)->withPivot(['notes']);
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class)->latest();
+    }
 }

@@ -16,7 +16,7 @@ class EventController extends Controller
 
     public function index(Request $request)
     {
-        $user= auth()->user();
+        $user= auth('web')->user();
         if ($user->type == 0)
         {
             if ($request->ajax())
@@ -37,8 +37,9 @@ class EventController extends Controller
     public function create()
     {
         $event = new Event;
-        $sponsors = Sponsor::active()->get();
-        $partnerships = Partnership::active()->get();
+        $user= auth('web')->user();
+        $sponsors = $user->sponsors()->active()->get();
+        $partnerships = $user->partnerships()->active()->get();
         return view('admin.pages.event.form',compact('event','sponsors','partnerships'));
     }
 
@@ -47,7 +48,7 @@ class EventController extends Controller
     {
         $inputs = $request->all();
         $inputs['invitation_code'] = rand(000000,999999);
-        $user= auth()->user();
+        $user= auth('web')->user();
         $event = $user->events()->create($inputs);
         $event->sponsors()->attach($request->sponsor_ids);
         $event->partnerships()->attach($request->partnership_ids);
@@ -65,8 +66,9 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        $sponsors = Sponsor::active()->get();
-        $partnerships = Partnership::active()->get();
+        $user= auth('web')->user();
+        $sponsors = $user->sponsors()->active()->get();
+        $partnerships = $user->partnerships()->active()->get();
         return view('admin.pages.event.form',compact('event','sponsors','partnerships'));
     }
 
