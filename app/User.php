@@ -20,6 +20,8 @@ class User extends Authenticatable  implements JWTSubject
         'name','username','phone','type', 'active', 'email', 'password',
     ];
 
+    protected $appends=['photo'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -94,7 +96,7 @@ class User extends Authenticatable  implements JWTSubject
     public function image()
     {
         return $this->morphOne('App\Image', 'imageable')->withDefault([
-            'url'=>'assets/admin/images/default-avatar.jpg'
+            'url'=>'assets/admin/images/default-avatar.png'
         ]);
     }
     public function getPhotoAttribute()
@@ -151,6 +153,11 @@ class User extends Authenticatable  implements JWTSubject
     public function questions()
     {
         return $this->hasMany(Question::class);
+    }
+
+    public function chat()
+    {
+        return $this->morphMany(Chat::class,'chatable');
     }
 
 }

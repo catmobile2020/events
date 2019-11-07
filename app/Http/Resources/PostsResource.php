@@ -17,6 +17,9 @@ class PostsResource extends JsonResource
         $data =[
             'id'=>$this->id,
             'desc'=>$this->desc,
+            'comments'=>CommentResource::collection($this->comments()->take(2)->get()),
+            'num_comments'=>$this->comments()->count(),
+            'photo'=>$this->photo,
         ];
         if ($this->speaker)
         {

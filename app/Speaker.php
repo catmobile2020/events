@@ -12,6 +12,8 @@ class Speaker extends Authenticatable  implements JWTSubject
     use Notifiable;
     protected $fillable=['name','phone','email','bio','active','password','event_id'];
 
+    protected $appends=['photo'];
+
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -49,7 +51,7 @@ class Speaker extends Authenticatable  implements JWTSubject
     public function image()
     {
         return $this->morphOne('App\Image', 'imageable')->withDefault([
-            'url'=>'assets/admin/images/default-avatar.jpg'
+            'url'=>'assets/admin/images/default-avatar.png'
         ]);
     }
     public function getPhotoAttribute()
@@ -91,5 +93,10 @@ class Speaker extends Authenticatable  implements JWTSubject
     public function questions()
     {
         return $this->hasMany(Question::class)->latest();
+    }
+
+    public function chat()
+    {
+        return $this->morphMany(Chat::class,'chatable');
     }
 }

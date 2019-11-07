@@ -23,12 +23,15 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::post('/{event}/join','EventController@joinToEvent');
             Route::post('/{event}/invite','EventController@inviteToEvent');
             Route::post('/{event}/join-by-invitation-code','EventController@joinToEventByCode');
+            Route::get('/{event}/chat','ChatController@chat');
+            Route::post('/{event}/chat','ChatController@sendMessage');
 
             Route::get('/{event}/posts','PostController@index');
             Route::get('/{event}/posts/{post}','PostController@show');
             Route::post('/{event}/posts','PostController@store');
             Route::post('/{event}/posts/{post}/update','PostController@update');
 
+            Route::get('/{post}/comments','CommentController@index');
             Route::post('/{post}/comments','CommentController@store');
             Route::put('/{post}/comments/{comment}','CommentController@update');
 

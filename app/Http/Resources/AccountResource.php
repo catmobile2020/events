@@ -19,6 +19,7 @@ class AccountResource extends JsonResource
             'username'=>$this->username,
             'phone'=>$this->phone,
             'email'=>$this->email,
+            'photo'=>$this->photo,
             'active'=>(boolean)$this->active,
             'type'=>$this->type_name,
         ];

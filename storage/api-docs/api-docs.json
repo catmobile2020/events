@@ -241,7 +241,115 @@
                 ]
             }
         },
+        "/events/{event}/chat": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get event chat message",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "add send message",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "message",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/events/{post}/comments": {
+            "get": {
+                "tags": [
+                    "comments"
+                ],
+                "summary": "Get post comments",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "comments"
@@ -1209,6 +1317,14 @@
                 "summary": "update My Account",
                 "parameters": [
                     {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
                         "name": "name",
                         "in": "formData",
                         "required": true,
@@ -1231,6 +1347,11 @@
                         "type": "string",
                         "format": "string",
                         "default": "mahmoudnada5050@gmail.com"
+                    },
+                    {
+                        "name": "photo",
+                        "in": "formData",
+                        "type": "file"
                     }
                 ],
                 "responses": {
@@ -1255,6 +1376,14 @@
                 ],
                 "summary": "update My Password",
                 "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
                     {
                         "name": "current_password",
                         "in": "formData",

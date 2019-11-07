@@ -20,7 +20,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('chat', require('./components/ChatComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,6 +42,10 @@ const app = new Vue({
         });
         window.Echo.channel('comment-channel.9')
             .listen('.comment_event', (e) => {
+                console.log(e);
+        });
+        window.Echo.channel('chat-channel.4')
+            .listen('.chat_event', (e) => {
                 console.log(e);
         });
     }

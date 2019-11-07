@@ -41,6 +41,7 @@
                                     <th>Is Public</th>
                                     <th>Active</th>
                                     <th>Event Features</th>
+                                    <th>Event Chat</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -71,6 +72,9 @@
                                             <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Event Feedback</a>
                                             <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Event Testimonials</a>
                                         </td>
+                                        <td>
+                                            <a class="btn btn-success btn-rounded" href="{{route('admin.events.chat',$row->id)}}">Event Chat</a>
+                                        </td>
                                         <td class="size-80">
                                             <div class="dropdown">
                                                 <a href="" data-toggle="dropdown" class="more-link"><i class="icon-dot-3 ellipsis-icon"></i></a>
@@ -96,6 +100,7 @@
                                     <th>Is Public</th>
                                     <th>Active</th>
                                     <th>Event Features</th>
+                                    <th>Event Chat</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

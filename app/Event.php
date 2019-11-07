@@ -116,4 +116,9 @@ class Event extends Model
     {
         return $this->partnerships()->where('active','=',1);
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Chat::class,'event_id')->latest();
+    }
 }

@@ -29,16 +29,22 @@ class RegisterRequest extends FormRequest
             'name' => 'required',
         ];
 
+        $user_id = auth()->id();
+        $table = 'users';
+        if (request()->header('type') == 2)
+        {
+            $table = 'speakers';
+        }
         if ($this->routeIs('api.account.update'))
         {
-            $roles +=['phone' => "required|unique:users,phone,{$this->user()->id}"];
-            $roles +=['email' => "required|unique:users,email,{$this->user()->id}"];
+            $roles +=['phone' => "required|unique:{$table},phone,{$user_id}"];
+            $roles +=['email' => "required|unique:{$table},email,{$user_id}"];
         }
 
         if ($this->routeIs('api.register'))
         {
-            $roles +=['phone' => "required|unique:users,phone"];
-            $roles +=['email' => "required|unique:users,email"];
+            $roles +=['phone' => "required|unique:{$table},phone"];
+            $roles +=['email' => "required|unique:{$table},email"];
             $roles +=['password' => 'required|min:6'];
         }
         return  $roles;

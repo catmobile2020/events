@@ -15,6 +15,41 @@ use App\Http\Controllers\Controller;
 
 class CommentController extends Controller
 {
+
+    /**
+     *
+     * @SWG\Get(
+     *      tags={"comments"},
+     *      path="/events/{post}/comments",
+     *      summary="Get post comments",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="post",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Post $post
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index(Post $post)
+    {
+        return CommentResource::collection($post->comments()->paginate(5));
+    }
+
     /**
      *
      * @SWG\Post(

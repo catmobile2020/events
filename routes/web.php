@@ -20,6 +20,10 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
             Route::get('events/{event}/destroy','EventController@destroy')->name('events.destroy')->middleware('admin');
             Route::get('events/{event}/analysis','EventController@analysis')->name('events.analysis');
             Route::get('events/{event}/feedback','EventController@feedback')->name('events.feedback');
+            Route::get('chat/{event}','ChatController@index')->name('events.chat');
+            Route::get('chat/get-messages/{event}','ChatController@getMessages');
+            Route::post('chat/send-message','ChatController@sendMessage');
+            Route::post('chat/delete-message/{message}','ChatController@deleteMessage');
 
             Route::resource('{event}/speakers','SpeakerController');
             Route::resource('{event}/talks','TalkController');

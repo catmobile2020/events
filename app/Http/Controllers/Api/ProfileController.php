@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\UploadImage;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\AccountResource;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
+    use UploadImage;
 
     /**
      *
@@ -53,6 +55,14 @@ class ProfileController extends Controller
      *      security={
      *          {"jwt": {}}
      *      },
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
      *      @SWG\Parameter(
      *         name="name",
      *         in="formData",
@@ -74,6 +84,10 @@ class ProfileController extends Controller
      *         type="string",
      *         format="string",
      *         default="mahmoudnada5050@gmail.com",
+     *      ),@SWG\Parameter(
+     *         name="photo",
+     *         in="formData",
+     *         type="file",
      *      ),
      *
      *      @SWG\Response(response=200, description="token"),
@@ -86,6 +100,8 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $user->update($request->all());
+        if ($request->photo)
+            $this->upload($request->photo,$user,null,true);
         return AccountResource::make($user);
     }
 
@@ -99,6 +115,14 @@ class ProfileController extends Controller
      *      security={
      *          {"jwt": {}}
      *      },
+     *     @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
      *      @SWG\Parameter(
      *         name="current_password",
      *         in="formData",
