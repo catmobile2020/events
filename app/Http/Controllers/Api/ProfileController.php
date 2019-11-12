@@ -78,6 +78,17 @@ class ProfileController extends Controller
      *         format="string",
      *         default="01208971865",
      *      ),@SWG\Parameter(
+     *         name="enable_questions",
+     *         in="formData",
+     *         required=true,
+     *         type="integer",
+     *         default="0",
+     *      ),@SWG\Parameter(
+     *         name="bio",
+     *         in="formData",
+     *         type="string",
+     *         format="string",
+     *      ),@SWG\Parameter(
      *         name="email",
      *         in="formData",
      *         required=true,
@@ -102,6 +113,10 @@ class ProfileController extends Controller
         $user->update($request->all());
         if ($request->photo)
             $this->upload($request->photo,$user,null,true);
+        if (\request()->header('type') == 2)
+        {
+            return SpeakerResource::make($user);
+        }
         return AccountResource::make($user);
     }
 

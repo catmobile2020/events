@@ -10,7 +10,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Speaker extends Authenticatable  implements JWTSubject
 {
     use Notifiable;
-    protected $fillable=['name','phone','email','bio','active','password','event_id'];
+    protected $fillable=['name','phone','email','bio','enable_questions','active','password','event_id'];
 
     protected $appends=['photo'];
 

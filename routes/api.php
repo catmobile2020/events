@@ -26,14 +26,18 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/{event}/chat','ChatController@chat');
             Route::post('/{event}/chat','ChatController@sendMessage');
 
-            Route::get('/{event}/posts','PostController@index');
-            Route::get('/{event}/posts/{post}','PostController@show');
-            Route::post('/{event}/posts','PostController@store');
+            Route::apiResource('/{event}/posts','PostController');
+//            Route::get('/{event}/posts','PostController@index');
+//            Route::post('/{event}/posts','PostController@store');
+//            Route::get('/{event}/posts/{post}','PostController@show');
             Route::post('/{event}/posts/{post}/update','PostController@update');
+//            Route::delete('/{event}/posts/{post}','PostController@destroy');
 
-            Route::get('/{post}/comments','CommentController@index');
-            Route::post('/{post}/comments','CommentController@store');
-            Route::put('/{post}/comments/{comment}','CommentController@update');
+            Route::apiResource('/{post}/comments','CommentController');
+//            Route::get('/{post}/comments','CommentController@index');
+//            Route::post('/{post}/comments','CommentController@store');
+//            Route::put('/{post}/comments/{comment}','CommentController@update');
+//            Route::delete('/{post}/comments/{comment}','CommentController@destroy');
 
             Route::get('/{event}/feedback','EventController@eventFeedback');
             Route::post('/{event}/feedback','EventController@storeEventFeedback');
@@ -43,13 +47,14 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/{event}/partnerships','PartnershipController@index');
 
             Route::apiResource('/{event}/polls','PollController');
-            Route::post('/{event}/polls/add-vote','PollController@addVote');
+            Route::post('/{event}/polls/{option}/add-vote','PollController@addVote');
 
             Route::get('/talks/{talk}/feedback','EventController@talkFeedback');
             Route::post('/talks/{talk}/feedback','EventController@storeTalkFeedback');
 
             Route::get('/custom/search','EventController@customSearch');
         });
+        Route::get('/my-events','EventController@myEvents');
 
         Route::get('/{speaker}/questions','LiveController@questions');
         Route::post('/live/{speaker}/questions','LiveController@sendQuestion');

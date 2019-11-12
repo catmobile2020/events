@@ -107,6 +107,7 @@ class CommentController extends Controller
             $comment = $post->comments()->create($inputs);
 
             $data = [
+                'event_id' =>$post->event->id,
                 'post_id' =>$comment->post_id,
                 'desc'=>$comment->desc,
                 'type'=>$comment->user_type,
@@ -179,5 +180,54 @@ class CommentController extends Controller
     {
         $comment->update(['desc'=>$request->desc]);
         return  CommentResource::make($comment);
+    }
+
+    /**
+     *
+     * @SWG\delete(
+     *      tags={"comments"},
+     *      path="/events/{post}/comments/{comment}",
+     *      summary="destroy Post comment",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="post",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="comment",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Post $post
+     * @param Comment $comment
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Post $post,Comment $comment)
+    {
+        $user = auth()->user();
+        if($comment->owner->id === $user->id)
+        {
+            $comment->delete();
+            return response()->json(null,204);
+        }
+        return response()->json(['data'=>"You Didn't Have Permission To Do That" ],401);
     }
 }

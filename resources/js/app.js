@@ -21,6 +21,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('chat', require('./components/ChatComponent.vue').default);
+Vue.component('notify', require('./components/NotifyComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,21 +32,38 @@ Vue.component('chat', require('./components/ChatComponent.vue').default);
 const app = new Vue({
     el: '#app',
     created: function () {
-
-        window.Echo.channel('question-channel.1')
-            .listen('.question_event', (e) => {
-                console.log(e);
-        });
-        window.Echo.channel('post-channel.2')
-            .listen('.post_event', (e) => {
-                console.log(e);
-        });
-        window.Echo.channel('comment-channel.9')
-            .listen('.comment_event', (e) => {
-                console.log(e);
-        });
-        window.Echo.channel('chat-channel.4')
-            .listen('.chat_event', (e) => {
+        let auth_id = document.head.querySelector('meta[name="auth_id"]').content;
+        window.auth_id =auth_id;
+        // window.Echo.channel('question-channel.1')
+        //     .listen('.question_event', (e) => {
+        //         console.log(e);
+        // });
+        // window.Echo.channel('post-channel.2')
+        //     .listen('.post_event', (e) => {
+        //         console.log(e);
+        // });
+        // window.Echo.channel('comment-channel.9')
+        //     .listen('.comment_event', (e) => {
+        //         console.log(e);
+        // });
+        // window.Echo.channel('chat-channel.4')
+        //     .listen('.chat_event', (e) => {
+        //         console.log(e);
+        // });
+        // window.Echo.channel('notify-channel.11')
+        //     .listen('.notify_event', (e) => {
+        //         console.log(e);
+        // });
+        // window.Echo.channel('notify-channel.1')
+        //     .listen('.notify_event', (e) => {
+        //         console.log(e);
+        // // });
+        // window.Echo.channel('poll-channel.1')
+        //     .listen('.poll_event', (e) => {
+        //         console.log(e);
+        // });
+        window.Echo.channel('vote-channel.9')
+            .listen('.vote_event', (e) => {
                 console.log(e);
         });
     }

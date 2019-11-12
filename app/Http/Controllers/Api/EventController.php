@@ -520,4 +520,39 @@ class EventController extends Controller
         return EventsResource::collection($events);
     }
 
+    /**
+     *
+     * @SWG\Get(
+     *      tags={"events"},
+     *      path="/my-events",
+     *      summary="Get my events",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="only attendee 1 => attendee",
+     *         format="integer",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     */
+    public function myEvents()
+    {
+        if (request()->header('type') == 1)
+        {
+            $user = auth()->user();
+            if($user->type == 1)
+            {
+                $events = $user->events()->with('user','activeSpeakers')->paginate(5);
+                return EventsResource::collection($events);
+            }
+            return response()->json(['data'=>'You Not Event Owner'],402);
+        }
+        return response()->json(['data'=>'Must Be Attendee'],402);
+    }
+
 }

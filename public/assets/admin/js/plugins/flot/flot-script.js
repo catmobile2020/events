@@ -1,5 +1,8 @@
 //Flot Bar Chart
 $(function () {
+    var ticks = [
+         [1, "New York"], [2, "New Delhi"], [3, "Taipei"], [4, "Beijing"], [5, "Sydney"],[6, "London"]
+    ];
     var barOptions = {
         series: {
             bars: {
@@ -16,7 +19,7 @@ $(function () {
             }
         },
         xaxis: {
-            tickDecimals: 0
+            ticks:  ticks,
         },
         colors: ["#00B8CE"],
         grid: {
@@ -49,7 +52,7 @@ $(function () {
 
 });
 
-//Flot Line Chart 
+//Flot Line Chart
 $(function () {
     var barOptions = {
         series: {

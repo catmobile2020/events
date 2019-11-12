@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Event;
+use App\Events\PollEvent;
+use App\Events\VoteEvent;
 use App\Http\Requests\Api\PollRequest;
+use App\Http\Resources\OptionResource;
 use App\Http\Resources\PollResource;
+use App\Option;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Swagger\Annotations as SWG;
@@ -104,7 +108,10 @@ class PollController extends Controller
                 $poll = $user->polls()->create($request->all());
                 foreach ($request->answers as $answer)
                     $poll->options()->create(['answer'=>$answer]);
-                return  PollResource::make($poll);
+
+                $resource_poll = PollResource::make($poll);
+                broadcast(new PollEvent($resource_poll));
+                return $resource_poll;
             }
             return response()->json(['data'=>'You Mast Be Speaker'],402);
         }
@@ -115,7 +122,7 @@ class PollController extends Controller
      *
      * @SWG\Post(
      *      tags={"polls"},
-     *      path="/events/{event}/polls/add-vote",
+     *      path="/events/{event}/polls/{option}/add-vote",
      *      summary="Add vote in Poll",
      *      security={
      *          {"jwt": {}}
@@ -125,7 +132,7 @@ class PollController extends Controller
      *         in="header",
      *         required=true,
      *         type="integer",
-     *         description="only Spaker  2=> speaker",
+     *         description="only attendees  1=> attendee",
      *         format="integer",
      *      ),
      *     @SWG\Parameter(
@@ -136,10 +143,11 @@ class PollController extends Controller
      *         format="integer",
      *      ),
      *     @SWG\Parameter(
-     *         name="option_id",
-     *         in="formData",
+     *         name="option",
+     *         in="path",
      *         required=true,
      *         type="integer",
+     *         format="integer",
      *      ),
      *     @SWG\Parameter(
      *         name="notes",
@@ -150,10 +158,11 @@ class PollController extends Controller
      *      @SWG\Response(response=200, description="object"),
      * )
      * @param Event $event
-     * @param PollRequest $request
+     * @param Option $option
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function addVote(Event $event,Request $request)
+    public function addVote(Event $event,Option $option,Request $request)
     {
         if ($event->active)
         {
@@ -162,7 +171,9 @@ class PollController extends Controller
             {
                 $user->options()->detach($request->option_id);
             }
-            $user->options()->attach($request->option_id,['notes'=>$request->notes]);
+            $user->options()->attach($option->id,['notes'=>$request->notes]);
+
+            broadcast(new VoteEvent(OptionResource::make($option)));
             return response()->json(['data'=>'send Successfully'],200);
         }
         return response()->json(['data'=>'Event is Not Active Yet !'],402);

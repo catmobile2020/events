@@ -111,7 +111,7 @@ class EventController extends Controller
        $num_comments = 1;
        $num_feedback = $event->feedback;
        $num_polls = 1;
-        return view('admin.pages.event.analysis',compact('num_attendees','num_speakers','num_active_speakers','num_talks','num_sponsors',
+        return view('admin.pages.event.analysis',compact('event','num_attendees','num_speakers','num_active_speakers','num_talks','num_sponsors',
             'num_partnerships','num_posts','num_comments','num_feedback','num_polls'
         ));
     }

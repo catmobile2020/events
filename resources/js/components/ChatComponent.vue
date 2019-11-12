@@ -5,7 +5,8 @@
                 <div class="comment-head">
                     <h4>
                         <img class="img-circle avatar" :alt="row.owner_name" :src="row.owner_photo">
-                        {{row.owner_name}} <span class="badge badge-info">{{row.owner_type}}</span>
+                        {{row.owner_name}}
+<!--                        <span class="badge badge-info">{{row.owner_type}}</span>-->
                     </h4>
                     <p class="float-left">{{row.created_at}}</p>
                 </div>
@@ -53,6 +54,7 @@
             window.Echo.channel('chat-channel.'+this.event_id)
                 .listen('.chat_event', (e) => {
                     self.messages.push(e);
+                    self.message = '';
                 });
         },
         methods:{
@@ -69,7 +71,6 @@
                 axios.post('/chat/delete-message/'+message).then(function (response) {
                     if (response.data['statue'] === true)
                     {
-                    console.log(response.data);
                         self.messages.splice(index, 1);
                     }
                 }

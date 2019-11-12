@@ -47,6 +47,7 @@ class Post extends Model
             @unlink($photo);
             $this->image()->delete();
         }
+        $this->comments()->delete();
         $this->delete();
     }
 

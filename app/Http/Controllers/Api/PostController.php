@@ -21,7 +21,7 @@ class PostController extends Controller
     /**
      *
      * @SWG\Get(
-     *      tags={"events"},
+     *      tags={"posts"},
      *      path="/events/{event}/posts",
      *      summary="Get event posts",
      *      security={
@@ -57,7 +57,7 @@ class PostController extends Controller
     /**
      *
      * @SWG\Get(
-     *      tags={"events"},
+     *      tags={"posts"},
      *      path="/events/{event}/posts/{post}",
      *      summary="Get single post",
      *      security={
@@ -101,7 +101,7 @@ class PostController extends Controller
     /**
      *
      * @SWG\Post(
-     *      tags={"events"},
+     *      tags={"posts"},
      *      path="/events/{event}/posts",
      *      summary="Add new Post To Event",
      *      security={
@@ -175,7 +175,7 @@ class PostController extends Controller
     /**
      *
      * @SWG\post(
-     *      tags={"events"},
+     *      tags={"posts"},
      *      path="/events/{event}/posts/{post}/update",
      *      summary="update Event Post",
      *      security={
@@ -228,5 +228,54 @@ class PostController extends Controller
         if ($request->photo)
             $this->upload($request->photo,$post,null,true);
         return  PostResource::make($post);
+    }
+
+
+    /**
+     *
+     * @SWG\delete(
+     *      tags={"posts"},
+     *      path="/events/{event}/posts/{post}",
+     *      summary="destroy Event Post",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="1 => attendee , 2=> speaker",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="event",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *     @SWG\Parameter(
+     *         name="post",
+     *         in="path",
+     *         required=true,
+     *         type="integer",
+     *         format="integer",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     * @param Event $event
+     * @param Post $post
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Event $event,Post $post)
+    {
+        $user = auth()->user();
+        if($post->postable->id === $user->id)
+        {
+            $post->trash();
+            return response()->json(null,204);
+        }
+        return response()->json(['data'=>"You Didn't Have Permission To Do That" ],401);
     }
 }

@@ -444,6 +444,46 @@
                         "jwt": []
                     }
                 ]
+            },
+            "delete": {
+                "tags": [
+                    "comments"
+                ],
+                "summary": "destroy Post comment",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "comment",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
             }
         },
         "/events": {
@@ -870,6 +910,34 @@
                 ]
             }
         },
+        "/my-events": {
+            "get": {
+                "tags": [
+                    "events"
+                ],
+                "summary": "Get my events",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "only attendee 1 => attendee",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/{speaker}/questions": {
             "get": {
                 "tags": [
@@ -1058,7 +1126,7 @@
                 ]
             }
         },
-        "/events/{event}/polls/add-vote": {
+        "/events/{event}/polls/{option}/add-vote": {
             "post": {
                 "tags": [
                     "polls"
@@ -1068,7 +1136,7 @@
                     {
                         "name": "type",
                         "in": "header",
-                        "description": "only Spaker  2=> speaker",
+                        "description": "only attendees  1=> attendee",
                         "required": true,
                         "type": "integer",
                         "format": "integer"
@@ -1081,10 +1149,11 @@
                         "format": "integer"
                     },
                     {
-                        "name": "option_id",
-                        "in": "formData",
+                        "name": "option",
+                        "in": "path",
                         "required": true,
-                        "type": "integer"
+                        "type": "integer",
+                        "format": "integer"
                     },
                     {
                         "name": "notes",
@@ -1108,7 +1177,7 @@
         "/events/{event}/posts": {
             "get": {
                 "tags": [
-                    "events"
+                    "posts"
                 ],
                 "summary": "Get event posts",
                 "parameters": [
@@ -1141,7 +1210,7 @@
             },
             "post": {
                 "tags": [
-                    "events"
+                    "posts"
                 ],
                 "summary": "Add new Post To Event",
                 "parameters": [
@@ -1188,9 +1257,49 @@
         "/events/{event}/posts/{post}": {
             "get": {
                 "tags": [
-                    "events"
+                    "posts"
                 ],
                 "summary": "Get single post",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "1 => attendee , 2=> speaker",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "post",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "posts"
+                ],
+                "summary": "destroy Event Post",
                 "parameters": [
                     {
                         "name": "type",
@@ -1230,7 +1339,7 @@
         "/events/{event}/posts/{post}/update": {
             "post": {
                 "tags": [
-                    "events"
+                    "posts"
                 ],
                 "summary": "update Event Post",
                 "parameters": [
@@ -1339,6 +1448,19 @@
                         "type": "string",
                         "format": "string",
                         "default": "01208971865"
+                    },
+                    {
+                        "name": "enable_questions",
+                        "in": "formData",
+                        "required": true,
+                        "type": "integer",
+                        "default": "0"
+                    },
+                    {
+                        "name": "bio",
+                        "in": "formData",
+                        "type": "string",
+                        "format": "string"
                     },
                     {
                         "name": "email",

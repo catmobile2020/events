@@ -11,7 +11,11 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
 
         Route::group(['middleware'=>['auth:web']],function (){
             Route::get('/','HomeController@index')->name('home');
+            Route::get('/notifications','HomeController@notifications');
+            Route::get('/notifications/{notification}','HomeController@readNotification');
+            Route::get('/notifications/read/all','HomeController@readAllNotification');
             Route::get('/profile','ProfileController@index')->name('profile');
+            Route::post('/profile','ProfileController@update')->name('profile.update');
 
             Route::resource('{type}/users','UserController');
             Route::get('{type}/users/{user}/destroy','UserController@destroy')->name('users.destroy');
