@@ -99,4 +99,10 @@ class Speaker extends Authenticatable  implements JWTSubject
     {
         return $this->morphMany(Chat::class,'chatable');
     }
+
+    public function messenger()
+    {
+        $type = $this->type ? 'attendee' : 'speaker';
+        return $this->morphMany(Room::class,'roomable');
+    }
 }

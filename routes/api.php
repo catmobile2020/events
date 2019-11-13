@@ -59,6 +59,11 @@ Route::group(['namespace' => 'Api'] ,function (){
         Route::get('/{speaker}/questions','LiveController@questions');
         Route::post('/live/{speaker}/questions','LiveController@sendQuestion');
 
+
+        Route::get('/rooms','RoomController@messenger');
+        Route::post('/rooms','RoomController@createRoom');
+        Route::post('/rooms/{room}/send-message','RoomController@sendMessage');
+
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/','ArticleController@index');
