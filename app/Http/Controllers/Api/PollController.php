@@ -88,6 +88,8 @@ class PollController extends Controller
      *         in="formData",
      *         required=true,
      *         type="array",
+     *         collectionFormat="multi",
+     *         uniqueItems=true,
      *         @SWG\Items(
      *           type="string",
      *         ),

@@ -1111,7 +1111,9 @@
                         "type": "array",
                         "items": {
                             "type": "string"
-                        }
+                        },
+                        "collectionFormat": "multi",
+                        "uniqueItems": true
                     }
                 ],
                 "responses": {
