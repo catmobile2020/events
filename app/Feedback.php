@@ -12,8 +12,4 @@ class Feedback extends Model
     {
         return $this->morphTo();
     }
-    public function event()
-    {
-        return $this->morphOne(Event::class,'feedbackable');
-    }
 }

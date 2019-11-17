@@ -17,28 +17,11 @@ class User extends Authenticatable  implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name','username','phone','type', 'active', 'email', 'password',
+        'type', 'active'
     ];
 
     protected $appends=['photo'];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to `native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    protected $with=['user'];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -58,38 +41,6 @@ class User extends Authenticatable  implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password']=bcrypt($value);
-    }
-
-    public function getActiveNameAttribute()
-    {
-        if ($this->active)
-        {
-            return 'Activated';
-        }
-        return 'Deactivated';
-    }
-
-    public function getTypeNameAttribute()
-    {
-        switch ($this->type)
-        {
-            case 0 :
-                return 'Admin';
-                break;
-            case 1 :
-                return 'Event Owner';
-                break;
-            case 2 :
-                return 'Attendee';
-                break;
-            default:
-                return '';
-        }
     }
 
 
@@ -115,6 +66,45 @@ class User extends Authenticatable  implements JWTSubject
         $this->delete();
     }
 
+    public function getActiveNameAttribute()
+    {
+        if ($this->active)
+        {
+            return 'Activated';
+        }
+        return 'Deactivated';
+    }
+
+    public function getTypeNameAttribute()
+    {
+        switch ($this->type)
+        {
+            case 0 :
+                return 'Admin';
+                break;
+            case 1 :
+                return 'Event Owner';
+                break;
+            case 2 :
+                return 'Speaker';
+                break;
+            case 3 :
+                return 'Attendee';
+                break;
+            default:
+                return '';
+        }
+    }
+
+    public function user()
+    {
+        if ($this->type == 2)
+        {
+            return $this->hasOne(Speaker::class);
+        }
+        return $this->hasOne(Attendee::class);
+    }
+
     public function events()
     {
         return $this->hasMany(Event::class);
@@ -122,7 +112,7 @@ class User extends Authenticatable  implements JWTSubject
 
     public function posts()
     {
-        return $this->morphMany(Post::class,'postable');
+        return $this->hasMany(Post::class);
     }
 
     public function ownerPosts()
@@ -133,6 +123,16 @@ class User extends Authenticatable  implements JWTSubject
     public function attendeeEvents()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function talks()
+    {
+        return $this->hasMany(Talk::class);
+    }
+
+    public function polls()
+    {
+        return $this->hasMany(Poll::class);
     }
 
     public function options()
@@ -152,24 +152,22 @@ class User extends Authenticatable  implements JWTSubject
 
     public function questions()
     {
-        return $this->hasMany(Question::class);
+        return $this->hasMany(Question::class)->latest();
     }
 
     public function chat()
     {
-        return $this->morphMany(Chat::class,'chatable');
+        return $this->hasMany(Chat::class);
     }
 
     public function messenger()
     {
-        $type = $this->type ? 'attendee' : 'speaker';
-        $queryBinding = $this->type ? $this->belongsTo(User::class) : $this->belongsTo(Speaker::class);
-        return $this->morphMany(Room::class,'roomable');
+        return $this->hasMany(Room::class);
     }
 
     public function messages()
     {
-        return $this->morphMany(Message::class,'messageable');
+        return $this->hasMany(Message::class);
     }
 
 }

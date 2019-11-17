@@ -37,19 +37,19 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Mahmoud Mohamed" value="{{$user->name}}">
+                                    <input type="text" name="name" class="form-control" id="name" placeholder="Mahmoud Mohamed" value="{{$user->user->name ?? null}}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="phone">phone</label>
-                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="01208971865" value="{{$user->phone}}">
+                                    <input type="text" name="phone" class="form-control" id="phone" placeholder="01208971865" value="{{$user->user->phone ?? null}}">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="email">email</label>
-                                    <input type="text" name="email" class="form-control" id="email" placeholder="m.mohamed@cat.com.eg" value="{{$user->email}}">
+                                    <input type="text" name="email" class="form-control" id="email" placeholder="m.mohamed@cat.com.eg" value="{{$user->user->email ?? null}}">
                                 </div>
                             </div>
                             <div class="col-lg-6">

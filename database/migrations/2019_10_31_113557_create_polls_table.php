@@ -16,8 +16,8 @@ class CreatePollsTable extends Migration
         Schema::create('polls', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('question');
-            $table->unsignedBigInteger('speaker_id')->nullable();
-            $table->foreign('speaker_id')->references('id')->on('speakers');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

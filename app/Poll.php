@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Poll extends Model
 {
-    protected $fillable=['question','speaker_id'];
+    protected $fillable=['question'];
 
-    public function speaker()
+    public function user()
     {
-        return $this->belongsTo(Speaker::class);
+        return $this->belongsTo(User::class)->withDefault();
     }
 
     public function options()

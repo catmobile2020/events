@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Attendee;
 use App\Http\Requests\Admin\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -22,19 +23,30 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $username = $request->username;
-        $row = User::where(function ($q) use ($username){
+//        $row = User::whereHas('user',function ($q) use ($username){
+//            $q->where(function ($q) use ($username){
+//                    $q->where('username',$username)->orWhere('email',$username);
+//            });
+//        })->first();
+
+        $attendee = Attendee::where(function ($q) use ($username){
             $q->where('username',$username)->orWhere('email',$username);
         })->first();
-        if ($row and $row->type !=2)
+
+        if ($attendee)
         {
-            if ($row->active ==0)
+            $row = $attendee->user;
+            if (!in_array($row->type,[2,3]))
             {
-                return redirect()->back()->with('message','Your Account Is DisActive Back To Admin');
-            }
-            if (Hash::check($request->password,$row->password))
-            {
-                auth()->guard('web')->login($row,$request->remember);
-                return redirect()->intended('/');
+                if ($row->active ==0)
+                {
+                    return redirect()->back()->with('message','Your Account Is DisActive Back To Admin');
+                }
+                if (Hash::check($request->password,$attendee->password))
+                {
+                    auth()->guard('web')->login($row,$request->remember);
+                    return redirect()->intended('/');
+                }
             }
         }
         return redirect()->back()->with('message','Error Your Credential is Wrong');

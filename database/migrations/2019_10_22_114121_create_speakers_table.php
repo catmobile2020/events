@@ -19,11 +19,12 @@ class CreateSpeakersTable extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('bio')->nullable();
-            $table->boolean('active')->default(false);
             $table->string('password');
             $table->boolean('enable_questions')->default(false);
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')->references('id')->on('events');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillable=['receive__id','user_type'];
+    protected $fillable=['sender_id','receive__id'];
 
-    public function roomable()
+    public function sender()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class,'sender_id')->withDefault();
+    }
+    public function receive()
+    {
+        return $this->belongsTo(User::class,'receive__id')->withDefault();
     }
 
     public function messages()
@@ -18,10 +22,4 @@ class Room extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function receiver()
-    {
-        if ($this->user_type == 'attendee')
-            return $this->belongsTo(User::class,'receive__id')->withDefault();
-        return $this->belongsTo(Speaker::class,'receive__id')->withDefault();
-    }
 }

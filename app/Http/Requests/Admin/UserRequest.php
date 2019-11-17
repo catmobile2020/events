@@ -29,13 +29,12 @@ class UserRequest extends FormRequest
 
         if ($this->routeIs('admin.users.update'))
         {
-            $data['phone']='required|max:191|unique:users,phone,'.$this->user('web')->id;
-            $data['email']='required|email|unique:users,email,'.$this->user('web')->id;
-//            $data['password']='confirmed|min:6';
+            $data['phone']='required|max:191|unique:attendees,phone,'.$this->user()->id;
+            $data['email']='required|email|unique:attendees,email,'.$this->user()->id;
         }else
         {
-            $data['phone']='required|max:191|unique:users,phone';
-            $data['email']='required|email|unique:users,email';
+            $data['phone']='required|max:191|unique:attendees,phone';
+            $data['email']='required|email|unique:attendees,email';
             $data['password']='required|confirmed|min:6';
         }
         return $data;

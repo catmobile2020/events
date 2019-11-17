@@ -26,7 +26,7 @@ class TalkRequest extends FormRequest
         return [
             'name'=>'required',
             'time'=>'required',
-            'speaker_id'=>'required|exists:speakers,id',
+            'user_id'=>'required|exists:users,id',
         ];
     }
 }

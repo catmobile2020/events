@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function index($type)
     {
-        $rows = User::where('type',$type)->paginate(20);
+        $rows = User::with('user')->where('type',$type)->paginate(20);
         return view('admin.pages.user.index',compact('rows'));
     }
 
@@ -20,6 +20,7 @@ class UserController extends Controller
     public function create($type)
     {
         $user = new User;
+        $user->user;
         return view('admin.pages.user.form',compact('user','type'));
     }
 
@@ -28,8 +29,8 @@ class UserController extends Controller
     {
         $inputs = $request->all();
         $inputs['username']=str_replace(' ','-',$request->name).'_'.rand(000,999);
-        $inputs['type']=$type;
-        User::create($inputs);
+        $owner = User::create(['type'=>$type,'active'=>$request->active]);
+        $owner->user()->create($inputs);
         return redirect()->route('admin.users.index',$type)->with('message','Done Successfully');
     }
 
@@ -42,6 +43,7 @@ class UserController extends Controller
 
     public function edit($type,User $user)
     {
+        $user->user;
         return view('admin.pages.user.form',compact('user','type'));
     }
 
@@ -50,8 +52,8 @@ class UserController extends Controller
     {
         $inputs = $request->all();
         $inputs['username']=str_replace(' ','-',$request->name).'_'.rand(000,999);
-        $inputs['type']=$type;
-        $user->update($inputs);
+        $owner = $user->update(['type'=>$type,'active'=>$request->active]);
+        $owner->user()->create($inputs);
         return redirect()->route('admin.users.index',$type)->with('message','Done Successfully');
     }
 

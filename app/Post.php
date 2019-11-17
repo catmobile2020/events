@@ -6,26 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable=['desc','event_id'];
-
-    public function postable()
-    {
-        return $this->morphTo();
-    }
+    protected $fillable=['desc'];
 
     public function user()
     {
-        return $this->belongsTo(User::class,'postable_id');
-    }
-
-    public function speaker()
-    {
-        return $this->belongsTo(Speaker::class,'postable_id');
+        return $this->belongsTo(User::class);
     }
 
     public function event()
     {
-        return $this->belongsTo(Event::class,'event_id');
+        return $this->belongsTo(Event::class);
     }
 
     public function image()

@@ -25,8 +25,8 @@ class SpeakerRequest extends FormRequest
     {
         $data = [
             'name' => 'required|max:191',
-            'phone' => 'required|max:191|unique:users,phone',
-            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|max:191|unique:speakers,phone',
+            'email' => 'required|email|unique:speakers,email',
         ];
 
         if ($this->routeIs('admin.speakers.store') or $this->request->get('password') != null)

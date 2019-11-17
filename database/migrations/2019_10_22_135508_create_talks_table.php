@@ -22,8 +22,8 @@ class CreateTalksTable extends Migration
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')->references('id')->on('events');
 
-            $table->unsignedBigInteger('speaker_id');
-            $table->foreign('speaker_id')->references('id')->on('speakers');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

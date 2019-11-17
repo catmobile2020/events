@@ -13,7 +13,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $user = auth()->user();
+        $user = auth()->user()->user;
        return view('admin.pages.profile',compact('user'));
     }
 
@@ -21,7 +21,7 @@ class ProfileController extends Controller
     {
         $inputs = $request->except('photo');
         $inputs['username']=str_replace(' ','-',$request->name).'_'.rand(000,999);
-        $user = auth()->user();
+        $user = auth()->user()->user;
         if ($request->has('password') and $request->get('password') !== null)
         {
             if (Hash::check($request->current_password,$user->password))

@@ -43,9 +43,9 @@
                                 @foreach($rows as $row)
                                     <tr class="gradeX">
                                         <td>{{$loop->iteration}}</td>
-                                        <td>{{$row->name}}</td>
-                                        <td>{{$row->phone}}</td>
-                                        <td>{{$row->email}}</td>
+                                        <td>{{$row->user->name}}</td>
+                                        <td>{{$row->user->phone}}</td>
+                                        <td>{{$row->user->email}}</td>
                                         <td>
                                             <span class="badge badge-{{ $row->active == 1 ? 'success' : 'danger' }}">{{ $row->active_name}}</span>
                                         </td>

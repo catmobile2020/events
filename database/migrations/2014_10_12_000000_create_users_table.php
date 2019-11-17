@@ -15,15 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('username')->unique();
-            $table->string('phone')->unique();
-            $table->string('email')->unique();
+            $table->tinyInteger('type')->default(1); // 0=>admin 1=> event_owner 2=> speaker  3=> attendee
             $table->boolean('active')->default(false);
-            $table->tinyInteger('type')->default(1); // 0=>admin 1=> event owner 2=> attendee
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
         });
     }

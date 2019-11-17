@@ -6,13 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable=['body','room_id'];
+    protected $fillable=['body'];
 
-    public function messageable()
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class)->withDefault();
     }
-
     public function room()
     {
         return $this->belongsTo(Room::class)->withDefault();

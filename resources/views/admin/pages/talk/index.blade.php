@@ -15,7 +15,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
                         <h3 class="panel-title">
-                            <a class="btn btn-success btn-rounded" href="{{route('admin.talks.create',$event->id)}}">Add Speaker</a>
+                            <a class="btn btn-success btn-rounded" href="{{route('admin.talks.create',$event->id)}}">Add Talk</a>
                         </h3>
                         <ul class="panel-tool-options">
                             <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
@@ -49,7 +49,7 @@
                                         <td>{{$row->name}}</td>
                                         <td>{{\Carbon\Carbon::parse($row->time)->format('h:i A')}}</td>
                                         <td>{{$row->duration}}</td>
-                                        <td>{{$row->speaker->name}}</td>
+                                        <td>{{$row->user->user->name}}</td>
                                         <td><a class="btn btn-danger btn-rounded" href="{{route('admin.talks.feedback',['event'=>$row->event_id,$row->id])}}">Talk Feedback</a></td>
                                         <td class="size-80">
                                             <div class="dropdown">

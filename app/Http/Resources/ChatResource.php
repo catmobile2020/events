@@ -20,9 +20,7 @@ class ChatResource extends JsonResource
             'event_id'=>$this->event_id,
             'message'=>$this->message,
             'created_at'=>$this->created_at->diffForHumans(),
-            'owner_name'=>$this->chatable->name,
-            'owner_photo'=>$this->chatable->photo,
-            'owner_type'=>$this->chatable_type === 'App\User' ? 'User' : 'Speaker',
+            'user'=>$this->user,
         ];
     }
 }

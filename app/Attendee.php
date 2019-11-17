@@ -7,12 +7,26 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Speaker extends Authenticatable  implements JWTSubject
+class Attendee extends Authenticatable  implements JWTSubject
 {
     use Notifiable;
-    protected $fillable=['name','phone','email','bio','password','enable_questions','event_id','user_id'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name','username','phone','email', 'password', 'user_id',
+    ];
 
+    protected $appends=['photo'];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -42,4 +56,10 @@ class Speaker extends Authenticatable  implements JWTSubject
     {
         $this->attributes['password']=bcrypt($value);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

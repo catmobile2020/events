@@ -15,9 +15,9 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->morphs('roomable');
+            $table->unsignedBigInteger('sender_id');
+            $table->foreign('sender_id')->references('id')->on('users');
             $table->unsignedBigInteger('receive__id');
-            $table->string('user_type')->default('attendee');
             $table->timestamps();
         });
     }

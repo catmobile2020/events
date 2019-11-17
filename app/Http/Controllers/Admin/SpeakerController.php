@@ -6,12 +6,14 @@ use App\Event;
 use App\Http\Requests\Admin\SpeakerRequest;
 use App\Speaker;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class SpeakerController extends Controller
 {
     public function index(Event $event)
     {
         $rows = $event->speakers()->paginate(20);
+//        dd($rows);
         return view('admin.pages.speaker.index',compact('rows','event'));
     }
 
@@ -26,7 +28,9 @@ class SpeakerController extends Controller
     public function store(Event $event,SpeakerRequest $request)
     {
         $inputs = $request->all();
-        $event->speakers()->create($inputs);
+        $inputs['event_id'] = $event->id;
+        $user =User::create(['type'=>2,'active'=>$request->active]);
+        $user->user()->create($inputs);
         return redirect()->route('admin.speakers.index',$event->id)->with('message','Done Successfully');
     }
 
@@ -57,7 +61,7 @@ class SpeakerController extends Controller
 
     public function destroy(Event $event,Speaker $speaker)
     {
-        $speaker->trash();
+        $speaker->delete();
         return redirect()->route('admin.speakers.index',$event->id)->with('message','Done Successfully');
     }
 }

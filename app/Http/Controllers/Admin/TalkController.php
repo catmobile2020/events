@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TalkRequest;
 use App\Speaker;
 use App\Talk;
+use App\User;
 
 class TalkController extends Controller
 {
@@ -21,7 +22,7 @@ class TalkController extends Controller
     public function create(Event $event)
     {
         $talk = new Talk();
-        $speakers = Speaker::all();
+        $speakers = User::where('type',2)->get();
         return view('admin.pages.talk.form',compact('talk','event','speakers'));
     }
 
@@ -29,6 +30,7 @@ class TalkController extends Controller
     public function store(Event $event,TalkRequest $request)
     {
         $inputs = $request->all();
+//        dd($inputs);
         $event->talks()->create($inputs);
         return redirect()->route('admin.talks.index',$event->id)->with('message','Done Successfully');
     }
@@ -42,7 +44,7 @@ class TalkController extends Controller
 
     public function edit(Event $event,Talk $talk)
     {
-        $speakers = Speaker::all();
+        $speakers = User::with('user')->get();
         return view('admin.pages.talk.form',compact('talk','event','speakers'));
     }
 

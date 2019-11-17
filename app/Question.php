@@ -15,7 +15,7 @@ class Question extends Model
 
     public function speaker()
     {
-        return $this->belongsTo(Speaker::class);
+        return $this->belongsTo(User::class,'speaker_id');
     }
 
 }

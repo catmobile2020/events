@@ -18,7 +18,7 @@ class ChatController extends Controller
 
     public function getMessages(Event $event)
     {
-        $messages = ChatResource::collection($event->messages()->with('chatable')->get());
+        $messages = ChatResource::collection($event->messages()->with('user')->get());
         return ['messages'=>$messages];
     }
 
@@ -26,7 +26,7 @@ class ChatController extends Controller
     {
         $user = auth('web')->user();
         $message = $user->chat()->create($request->only(['message','event_id']));
-        $message->chatable;
+        $message->user;
         $message = ChatResource::make($message);
         broadcast(new ChatEvent($message));
         return ['message'=>$message];

@@ -55,9 +55,9 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="email">Select speaker</label>
-                                    <select class="form-control" name="speaker_id">
+                                    <select class="form-control" name="user_id">
                                         @foreach($speakers as $speaker)
-                                            <option value="{{$speaker->id}}" {{$speaker->id == $talk->speaker_id ? 'selected' : ''}}>{{$speaker->name}}</option>
+                                            <option value="{{$speaker->id}}" {{$speaker->id == $talk->speaker_id ? 'selected' : ''}}>{{$speaker->user->name ?? null}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chat extends Model
 {
-    protected $fillable=['message','event_id'];
+    protected $fillable=['message','user_id','event_id'];
 
-    public function chatable()
+    public function user()
     {
-        return $this->morphTo();
+        return $this->belongsTo(User::class);
     }
 
     public function event()
     {
-        return $this->belongsTo(Event::class,'event_id');
+        return $this->belongsTo(Event::class);
     }
 
     public function image()

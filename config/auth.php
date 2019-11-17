@@ -43,11 +43,7 @@ return [
         'api' => [
             'driver' => 'jwt',
             'provider' => 'users',
-        ],
-        'speakers' => [
-            'driver' => 'jwt',
-            'provider' => 'speakers',
-        ],
+        ]
     ],
 
     /*
@@ -71,10 +67,6 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
-        ],
-        'speakers' => [
-            'driver' => 'eloquent',
-            'model' => App\Speaker::class,
         ],
 
         // 'users' => [
@@ -101,11 +93,6 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-        ],
-        'speakers' => [
-            'provider' => 'speakers',
             'table' => 'password_resets',
             'expire' => 60,
         ],
