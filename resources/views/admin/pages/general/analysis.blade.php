@@ -8,11 +8,11 @@
 
 @section('content')
     <div class="main-content">
-        <h1 class="page-title">{{$event->name}} analysis</h1>
+        <h1 class="page-title">General analysis</h1>
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
-            <li class="active"><strong>{{$event->name}} analysis</strong></li>
+            <li class="active"><strong>General analysis</strong></li>
         </ol>
         <div class="row">
             <div class="col-lg-6">
@@ -37,7 +37,37 @@
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <div class="panel-title">Event Features</div>
+                        <div class="panel-title">Pie Chart Example</div>
+                        <ul class="panel-tool-options">
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"><i class="icon-cog"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-arrows-ccw"></i> Update data</a></li>
+                                    <li><a href="#"><i class="icon-list"></i> Detailed log</a></li>
+                                    <li><a href="#"><i class="icon-chart-pie"></i> Statistics</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><i class="icon-cancel"></i> Clear list</a></li>
+                                </ul>
+                            </li>
+                            <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
+                            <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
+                            <li><a data-rel="close" href="#"><i class="icon-cancel"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- panel body -->
+                    <div class="panel-body">
+                        <div class="flot-chart">
+                            <div id="flot-pie-chart" class="flot-chart-pie-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading clearfix">
+                        <div class="panel-title">Line Chart Example</div>
                         <ul class="panel-tool-options">
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"><i class="icon-cog"></i></a>
@@ -80,7 +110,7 @@
         //Flot Bar Chart
         $(function () {
             var ticks = [
-                [1, "attendees"], [2, "speakers"], [3, "activeSpeakers"], [4, "talks"], [5, "sponsors"],[6, "partnerships"]
+                [1, "all  events"], [2, " active events"], [3, " available events"]
             ];
             var barOptions = {
                 series: {
@@ -119,22 +149,58 @@
             var barData = {
                 label: "bar",
                 data: [
-                    [1, {{$num_attendees}}],
-                    [2, {{$num_speakers}}],
-                    [3, {{$num_active_speakers}}],
-                    [4, {{$num_talks}}],
-                    [5, {{$num_sponsors}}],
-                    [6, {{$num_partnerships}}]
+                    [1, {{$events}}],
+                    [2, {{$active_events}}],
+                    [3, {{$available_events}}],
                 ]
             };
             $.plot($("#flot-bar-chart"), [barData], barOptions);
 
         });
 
+
+        //Flot Pie Chart
+        $(function () {
+
+            var data = [{
+                label: "events owners",
+                data: '{{$events_owners}}',
+                color: "#F64D2A",
+            }, {
+                label: "attendees",
+                data: '{{$attendees}}',
+                color: "#00a65a",
+            }, {
+                label: "speakers",
+                data: '{{$speakers}}',
+                color: "#f39c12",
+            }];
+
+            var plotObj = $.plot($("#flot-pie-chart"), data, {
+                series: {
+                    pie: {
+                        show: true
+                    }
+                },
+                grid: {
+                    hoverable: true
+                },
+                tooltip: true,
+                tooltipOpts: {
+                    content: "%p.0%, %s", // show percentages, rounding to 2 decimal places
+                    shifts: {
+                        x: 20,
+                        y: 0
+                    },
+                    defaultTheme: false
+                }
+            });
+
+        });
         //Flot Line Chart
         $(function () {
             var ticks = [
-                [1, "posts"], [2, "comments"], [3, "feedback"], [4, "testimonials"], [5, "polls"],[6, "questions"],
+                [1, "articles"], [2, "banners"]
             ];
             var barOptions = {
                 series: {
@@ -173,12 +239,8 @@
             var barData = {
                 label: "bar",
                 data: [
-                    [1, {{$num_posts}}],
-                    [2, {{$num_comments}}],
-                    [3, {{$num_feedback}}],
-                    [4, {{$num_testimonials}}],
-                    [5, {{$num_polls}}],
-                    [6, {{$num_questions}}],
+                    [1, {{$articles}}],
+                    [2, {{$banners}}],
                 ]
             };
             $.plot($("#flot-line-chart"), [barData], barOptions);

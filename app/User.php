@@ -162,8 +162,6 @@ class User extends Authenticatable  implements JWTSubject
 
     public function messenger()
     {
-        $type = $this->type ? 'attendee' : 'speaker';
-        $queryBinding = $this->type ? $this->belongsTo(User::class) : $this->belongsTo(Speaker::class);
         return $this->morphMany(Room::class,'roomable');
     }
 

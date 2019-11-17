@@ -53,6 +53,11 @@ class Event extends Model
         return $this->hasMany(Speaker::class);
     }
 
+    public function scopeActive($q)
+    {
+        return $q->where('active',1);
+    }
+
     public function activeSpeakers()
     {
         return $this->speakers()->where('active','=',1);
@@ -71,6 +76,11 @@ class Event extends Model
     public function posts()
     {
         return $this->hasMany(Post::class,'event_id')->latest();
+    }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(Comment::class,Post::class);
     }
 
     public function testimonials()
@@ -96,6 +106,11 @@ class Event extends Model
     public function polls()
     {
         return $this->hasManyThrough(Poll::class,Speaker::class);
+    }
+
+    public function questions()
+    {
+        return $this->hasManyThrough(Question::class,Speaker::class);
     }
 
     public function sponsors()

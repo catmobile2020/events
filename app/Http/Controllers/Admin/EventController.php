@@ -101,18 +101,21 @@ class EventController extends Controller
 
     public function analysis(Event $event)
     {
-       $num_attendees = $event->users;
-       $num_speakers = $event->speakers;
-       $num_active_speakers = $event->activeSpeakers;
-       $num_talks = $event->talks;
-       $num_sponsors = 1;
-       $num_partnerships = 1;
-       $num_posts = $event->posts;
-       $num_comments = 1;
-       $num_feedback = $event->feedback;
-       $num_polls = 1;
-        return view('admin.pages.event.analysis',compact('event','num_attendees','num_speakers','num_active_speakers','num_talks','num_sponsors',
-            'num_partnerships','num_posts','num_comments','num_feedback','num_polls'
+       $num_attendees = count($event->users);
+       $num_speakers = count($event->speakers);
+       $num_active_speakers = count($event->activeSpeakers);
+       $num_talks = count($event->talks);
+       $num_sponsors = count($event->activeSponsors);
+       $num_partnerships = count($event->activePartnerships);
+       $num_posts = count($event->posts);
+       $num_comments = count($event->comments);
+       $num_feedback = count($event->feedback);
+       $num_testimonials = count($event->testimonials);
+       $num_polls = count($event->polls);
+       $num_questions = count($event->questions);
+        return view('admin.pages.event.analysis',compact(
+            'event','num_attendees','num_speakers','num_active_speakers','num_talks','num_sponsors',
+            'num_partnerships','num_posts','num_comments','num_feedback','num_polls','num_testimonials','num_questions'
         ));
     }
 }

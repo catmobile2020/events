@@ -5,7 +5,7 @@
     <header class="site-header">
         <div class="site-logo">
             <a href="{{route('admin.home')}}">
-                <img src="{{asset('assets/admin/images/logo.png')}}" alt="Mouldifi" title="Mouldifi">
+                <img src="{{asset('assets/admin/images/logo.png')}}" alt="Events System" title="Events System">
             </a>
         </div>
         <div class="sidebar-collapse hidden-xs"><a class="sidebar-collapse-icon" href="#"><i class="icon-menu"></i></a></div>
@@ -66,13 +66,11 @@
                 <li class="{{Route::is('admin.events.index') ? 'active' : ''}}"><a href="{{route('admin.events.index')}}"><span class="title">Show All</span></a></li>
             </ul>
         </li>
-{{--        <li class="has-sub {{Route::is('admin.testimonials.*') ? 'active' : ''}}">--}}
-{{--            <a href=""><i class="icon-layout"></i><span class="title">testimonials</span></a>--}}
-{{--            <ul class="nav collapse">--}}
-{{--                <li class="{{Route::is('admin.testimonials.create') ? 'active' : ''}}"><a href="{{route('admin.testimonials.create')}}"><span class="title">Add New</span></a></li>--}}
-{{--                <li class="{{Route::is('admin.testimonials.index') ? 'active' : ''}}"><a href="{{route('admin.testimonials.index')}}"><span class="title">Show All</span></a></li>--}}
-{{--            </ul>--}}
-{{--        </li>--}}
+        @if (auth()->user()->type == 0)
+        <li class="has-sub {{Route::is('admin.analysis.*') ? 'active' : ''}}">
+            <a href="{{route('admin.analysis.index')}}"><i class="icon-inbox"></i><span class="title">analysis</span></a>
+        </li>
+        @endif
     </ul>
     <!-- /main navigation -->
 </div>

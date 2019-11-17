@@ -55,6 +55,8 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
                 Route::resource('banners','BannerController');
                 Route::get('banners/{banner}/destroy','BannerController@destroy')->name('banners.destroy');
 
+                Route::get('analysis','AnalysisController@index')->name('analysis.index');
+
             });
 
         });
