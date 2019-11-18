@@ -71,6 +71,9 @@
                                             <a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Event Posts</a>
                                             <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Event Feedback</a>
                                             <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Event Testimonials</a>
+                                            @if ($row->have_ticket)
+                                                <a class="btn btn-primary btn-rounded" href="{{route('admin.tickets.index',$row->id)}}">Event tickets</a>
+                                            @endif
                                         </td>
                                         <td>
                                             <a class="btn btn-success btn-rounded" href="{{route('admin.events.chat',$row->id)}}">Event Chat</a>

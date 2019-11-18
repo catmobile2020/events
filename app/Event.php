@@ -136,4 +136,9 @@ class Event extends Model
     {
         return $this->hasMany(Chat::class,'event_id')->latest();
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

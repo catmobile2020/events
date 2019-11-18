@@ -1538,6 +1538,34 @@
                 ]
             }
         },
+        "/account/my-tickets": {
+            "get": {
+                "tags": [
+                    "ticketing"
+                ],
+                "summary": "Get my tickets",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "only attendee 1 => attendee",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
         "/rooms": {
             "get": {
                 "tags": [
@@ -1690,6 +1718,50 @@
                         "required": true,
                         "type": "integer",
                         "format": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "object"
+                    }
+                },
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ]
+            }
+        },
+        "/events/{event}/booking-ticket": {
+            "post": {
+                "tags": [
+                    "ticketing"
+                ],
+                "summary": "booking event ticket",
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "header",
+                        "description": "only attendee 1 => attendee",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "event",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "format": "integer"
+                    },
+                    {
+                        "name": "method_type",
+                        "in": "formData",
+                        "description": "1=>cash  2=>credit",
+                        "required": true,
+                        "type": "string",
+                        "format": "string",
+                        "default": "1"
                     }
                 ],
                 "responses": {

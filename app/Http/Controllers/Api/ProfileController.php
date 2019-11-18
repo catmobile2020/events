@@ -7,6 +7,7 @@ use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Resources\AccountResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SpeakerResource;
+use App\Http\Resources\TicketResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -33,8 +34,6 @@ class ProfileController extends Controller
      *      ),
      *      @SWG\Response(response=200, description="object"),
      * )
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function me()
     {
@@ -164,12 +163,43 @@ class ProfileController extends Controller
         {
             if ($request->current_password === $request->password)
             {
-                return response()->json(['status'=>200,'message'=>'same password']);
+                return response()->json(['data'=>"same password"],200);
             }
             $user->update(['password'=>$request->password]);
 
             return AccountResource::make($user);
         }
-        return response()->json(['status'=>400,'message'=>'wrong password']);
+        return response()->json(['data'=>"wrong password"],400);
+    }
+
+    /**
+     *
+     * @SWG\Get(
+     *      tags={"ticketing"},
+     *      path="/account/my-tickets",
+     *      summary="Get my tickets",
+     *      security={
+     *          {"jwt": {}}
+     *      },
+     *      @SWG\Parameter(
+     *         name="type",
+     *         in="header",
+     *         required=true,
+     *         type="integer",
+     *         description="only attendee 1 => attendee",
+     *         format="integer",
+     *      ),
+     *      @SWG\Response(response=200, description="object"),
+     * )
+     */
+    public function myTickets()
+    {
+        if (request()->hasHeader('type') and request()->header('type') == 2)
+        {
+            return response()->json(['data'=>"User Type Wrong Try Again"],400);
+        }
+        $user = auth()->user();
+        $tickets = $user->tickets;
+        return TicketResource::collection($tickets);
     }
 }

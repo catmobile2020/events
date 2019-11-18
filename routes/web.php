@@ -48,6 +48,9 @@ Route::group(['prefix'=>'/','namespace'=>'Admin','as'=>'admin.'],function (){
             Route::resource('{event}/testimonials','TestimonialController');
             Route::get('{event}/testimonials/{testimonial}/destroy','TestimonialController@destroy')->name('testimonials.destroy');
 
+            Route::get('{event}/tickets','TicketController@index')->name('tickets.index');
+            Route::post('{event}/tickets','TicketController@store')->name('tickets.store');
+
             Route::group(['middleware'=>'admin'],function (){
                 Route::resource('articles','ArticleController');
                 Route::get('articles/{article}/destroy','ArticleController@destroy')->name('articles.destroy');

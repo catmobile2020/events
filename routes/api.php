@@ -13,6 +13,7 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::get('/me','ProfileController@me');
             Route::post('/update','ProfileController@update')->name('api.account.update');
             Route::post('/update-password','ProfileController@updatePassword');
+            Route::get('/my-tickets','ProfileController@myTickets');
         });
 
         Route::group(['prefix' => 'events'], function () {
@@ -25,6 +26,8 @@ Route::group(['namespace' => 'Api'] ,function (){
             Route::post('/{event}/join-by-invitation-code','EventController@joinToEventByCode');
             Route::get('/{event}/chat','ChatController@chat');
             Route::post('/{event}/chat','ChatController@sendMessage');
+
+            Route::post('/{event}/booking-ticket','TicketController@booking');
 
             Route::apiResource('/{event}/posts','PostController');
 //            Route::get('/{event}/posts','PostController@index');

@@ -155,6 +155,11 @@ class User extends Authenticatable  implements JWTSubject
         return $this->hasMany(Question::class);
     }
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class)->latest();
+    }
+
     public function chat()
     {
         return $this->morphMany(Chat::class,'chatable');
