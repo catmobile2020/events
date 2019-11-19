@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main-content">
-        <h1 class="page-title">Data Tables</h1>
+        <h1 class="page-title">banners</h1>
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
@@ -14,7 +14,6 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h3 class="panel-title">Basic Data Tables with responsive Plugin</h3>
                         <ul class="panel-tool-options">
                             <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
                             <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>

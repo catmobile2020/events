@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Mouldifi - A fully responsive, HTML5 based admin theme">
     <meta name="keywords" content="Responsive, HTML5, admin theme, business, professional, Mouldifi, web design, CSS3">
-    <title>Mouldifi | Login</title>
+    <title>Events System | Login</title>
     <!-- Site favicon -->
     <link rel='shortcut icon' type='image/x-icon' href='{{asset('assets/admin/images/favicon.ico')}}' />
     <!-- /site favicon -->

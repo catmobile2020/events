@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main-content">
-        <h1 class="page-title">Data Tables</h1>
+        <h1 class="page-title">Post Comments</h1>
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>

@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="main-content">
-        <h1 class="page-title">Data Tables</h1>
+        <h1 class="page-title">Events</h1>
         <!-- Breadcrumb -->
         <ol class="breadcrumb breadcrumb-2">
             <li><a href="{{route('admin.home')}}"><i class="fa fa-home"></i>Home</a></li>
@@ -14,7 +14,6 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h3 class="panel-title">Basic Data Tables with responsive Plugin</h3>
                         <ul class="panel-tool-options">
                             <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
                             <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
@@ -66,13 +65,13 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Event Speakers</a>
-                                            <a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Event Talks</a>
-                                            <a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Event Posts</a>
-                                            <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Event Feedback</a>
-                                            <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Event Testimonials</a>
+                                            <a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Speakers</a>
+                                            <a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Talks</a>
+                                            <a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Posts</a>
+                                            <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Feedback</a>
+                                            <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Testimonials</a>
                                             @if ($row->have_ticket)
-                                                <a class="btn btn-primary btn-rounded" href="{{route('admin.tickets.index',$row->id)}}">Event tickets</a>
+                                                <a class="btn btn-primary btn-rounded" href="{{route('admin.tickets.index',$row->id)}}">tickets</a>
                                             @endif
                                         </td>
                                         <td>

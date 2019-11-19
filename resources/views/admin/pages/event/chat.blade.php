@@ -14,7 +14,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <h3 class="panel-title">Mesasges</h3>
+                        <h3 class="panel-title">Messages</h3>
                         <ul class="panel-tool-options">
                             <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
                             <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
@@ -27,12 +27,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer-main">
-            &copy; 2016 <strong>Mouldifi</strong> Admin Theme by <a target="_blank" href="#/">G-axon</a>
-        </footer>
-        <!-- /footer -->
-
     </div>
 @endsection

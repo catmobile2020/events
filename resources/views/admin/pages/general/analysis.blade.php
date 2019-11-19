@@ -19,7 +19,7 @@
                 <!-- panel-->
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <div class="panel-title">Event Users Chart</div>
+                        <div class="panel-title">Events</div>
                         <ul class="panel-tool-options">
                             <li><a data-rel="collapse" href="#"><i class="icon-down-open"></i></a></li>
                             <li><a data-rel="reload" href="#"><i class="icon-arrows-ccw"></i></a></li>
@@ -37,7 +37,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <div class="panel-title">Pie Chart Example</div>
+                        <div class="panel-title">Event Users Chart</div>
                         <ul class="panel-tool-options">
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"><i class="icon-cog"></i></a>
@@ -67,7 +67,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-default">
                     <div class="panel-heading clearfix">
-                        <div class="panel-title">Line Chart Example</div>
+                        <div class="panel-title">articles & banners</div>
                         <ul class="panel-tool-options">
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false"><i class="icon-cog"></i></a>
