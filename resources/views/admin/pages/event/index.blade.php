@@ -65,17 +65,31 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Speakers</a>
-                                            <a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Talks</a>
-                                            <a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Posts</a>
-                                            <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Feedback</a>
-                                            <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Testimonials</a>
+                                            @can('speakers')
+                                                <a class="btn btn-info btn-rounded" href="{{route('admin.speakers.index',$row->id)}}">Speakers</a>
+                                            @endcan
+                                            @can('talks')
+                                                <a class="btn btn-success btn-rounded" href="{{route('admin.talks.index',$row->id)}}">Talks</a>
+                                            @endcan
+                                            @can('posts')
+                                                <a class="btn btn-warning btn-rounded" href="{{route('admin.posts.index',$row->id)}}">Posts</a>
+                                            @endcan
+                                            @can('feedback')
+                                                <a class="btn btn-danger btn-rounded" href="{{route('admin.events.feedback',$row->id)}}">Feedback</a>
+                                            @endcan
+                                            @can('testimonials')
+                                                <a class="btn btn-blue btn-rounded" href="{{route('admin.testimonials.index',$row->id)}}">Testimonials</a>
+                                            @endcan
                                             @if ($row->have_ticket)
-                                                <a class="btn btn-primary btn-rounded" href="{{route('admin.tickets.index',$row->id)}}">tickets</a>
+                                                @can('tickets')
+                                                    <a class="btn btn-primary btn-rounded" href="{{route('admin.tickets.index',$row->id)}}">tickets</a>
+                                                @endcan
                                             @endif
                                         </td>
                                         <td>
-                                            <a class="btn btn-success btn-rounded" href="{{route('admin.events.chat',$row->id)}}">Event Chat</a>
+                                            @can('chat group')
+                                                <a class="btn btn-success btn-rounded" href="{{route('admin.events.chat',$row->id)}}">Event Chat</a>
+                                            @endcan
                                         </td>
                                         <td class="size-80">
                                             <div class="dropdown">

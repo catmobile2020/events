@@ -45,7 +45,12 @@ class RegisterRequest extends FormRequest
         {
             $roles +=['phone' => "required|unique:{$table},phone"];
             $roles +=['email' => "required|unique:{$table},email"];
-            $roles +=['password' => 'required|min:6'];
+            $roles +=['password' => ['required',
+                'min:8',
+                'max:24',
+                'regex:/^.*(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).*$/'
+                    ]
+            ];
         }
         return  $roles;
     }

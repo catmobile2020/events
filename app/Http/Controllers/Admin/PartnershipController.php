@@ -12,6 +12,11 @@ class PartnershipController extends Controller
 {
     use UploadImage;
 
+    public function __construct()
+    {
+        $this->middleware('permission:partnerships');
+    }
+
     public function index(Request $request)
     {
         $user= auth()->user();

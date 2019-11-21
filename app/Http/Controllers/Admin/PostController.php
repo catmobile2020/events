@@ -13,6 +13,11 @@ class PostController extends Controller
 {
     use UploadImage;
 
+    public function __construct()
+    {
+        $this->middleware('permission:posts');
+    }
+
     public function index(Event $event)
     {
         $rows = $event->posts()->latest()->paginate(20);

@@ -12,6 +12,11 @@ class SponsorController extends Controller
 {
     use UploadImage;
 
+    public function __construct()
+    {
+        $this->middleware('permission:sponsors');
+    }
+
     public function index(Request $request)
     {
         $user= auth()->user();

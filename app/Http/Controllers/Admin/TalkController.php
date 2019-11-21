@@ -11,6 +11,11 @@ use App\Talk;
 
 class TalkController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:talks');
+    }
+
     public function index(Event $event)
     {
         $rows = $event->talks()->paginate(20);

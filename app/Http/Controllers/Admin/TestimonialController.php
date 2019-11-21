@@ -13,6 +13,11 @@ class TestimonialController extends Controller
 {
     use UploadImage;
 
+    public function __construct()
+    {
+        $this->middleware('permission:testimonials');
+    }
+
     public function index(Event $event,Request $request)
     {
         if ($request->ajax())

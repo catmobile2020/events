@@ -25,12 +25,13 @@ class UserRequest extends FormRequest
     {
         $data = [
             'name' => 'required|max:191',
+            'permissions' => 'required|array',
         ];
 
         if ($this->routeIs('admin.users.update'))
         {
-            $data['phone']='required|max:191|unique:users,phone,'.$this->user('web')->id;
-            $data['email']='required|email|unique:users,email,'.$this->user('web')->id;
+            $data['phone']='required|max:191|unique:users,phone,'.$this->user->id;
+            $data['email']='required|email|unique:users,email,'.$this->user->id;
 //            $data['password']='confirmed|min:6';
         }else
         {

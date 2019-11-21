@@ -61,6 +61,16 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-lg-12  bg-danger">
+                                <h2 class="text-center  bg-info">Select Permissions</h2>
+                                @foreach($permissions as $permission)
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <input type="checkbox" name="permissions[]" value="{{$permission->name}}" class="form-control" {{$user->hasPermissionTo($permission->name) ? 'checked' : ''}}>{{$permission->name}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="password">password</label>

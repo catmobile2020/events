@@ -131,6 +131,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'password' => array(
+            'regex' => 'Password must contain at least one number , must contain at least one lowercase letter and must contain at least one uppercase letter.'
+        )
     ],
 
     /*

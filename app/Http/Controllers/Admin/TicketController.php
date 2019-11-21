@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:tickets');
+    }
+
     public function index(Event $event,Request $request)
     {
         if ($request->ajax())

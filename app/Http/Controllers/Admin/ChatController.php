@@ -11,6 +11,11 @@ use App\Http\Controllers\Controller;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:chat group');
+    }
+
     public function index(Event $event)
     {
         return view('admin.pages.event.chat',compact('event'));

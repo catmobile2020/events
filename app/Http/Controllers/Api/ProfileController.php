@@ -75,7 +75,7 @@ class ProfileController extends Controller
      *         required=true,
      *         type="string",
      *         format="string",
-     *         default="01208971865",
+     *         default="01205528825",
      *      ),@SWG\Parameter(
      *         name="enable_questions",
      *         in="formData",
@@ -93,7 +93,7 @@ class ProfileController extends Controller
      *         required=true,
      *         type="string",
      *         format="string",
-     *         default="mahmoudnada5050@gmail.com",
+     *         default="m.mohamed@cat.com.eg",
      *      ),@SWG\Parameter(
      *         name="photo",
      *         in="formData",
@@ -112,11 +112,15 @@ class ProfileController extends Controller
         $user->update($request->all());
         if ($request->photo)
             $this->upload($request->photo,$user,null,true);
-        if (\request()->header('type') == 2)
-        {
-            return SpeakerResource::make($user);
-        }
-        return AccountResource::make($user);
+
+        auth()->invalidate();
+        $token= auth()->tokenById($user->id);
+        return $this->respondWithToken($token,$user->type);
+//        if (\request()->header('type') == 2)
+//        {
+//            return SpeakerResource::make($user);
+//        }
+//        return AccountResource::make($user);
     }
 
 
@@ -201,5 +205,15 @@ class ProfileController extends Controller
         $user = auth()->user();
         $tickets = $user->tickets;
         return TicketResource::collection($tickets);
+    }
+
+    protected function respondWithToken($token,$type)
+    {
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'auth_type' => $type,
+            'expires_in' => auth()->factory()->getTTL() * 60
+        ]);
     }
 }

@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class SpeakerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:speakers');
+    }
+
     public function index(Event $event)
     {
         $rows = $event->speakers()->paginate(20);
