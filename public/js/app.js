@@ -60180,11 +60180,10 @@ var app = new Vue({
     //     .listen('.question_event', (e) => {
     //         console.log(e);
     // });
-    // window.Echo.channel('post-channel.2')
-    //     .listen('.post_event', (e) => {
-    //         console.log(e);
-    // });
-    // window.Echo.channel('comment-channel.9')
+
+    window.Echo.channel('post-channel.1').listen('.post_event', function (e) {
+      console.log(e);
+    }); // window.Echo.channel('comment-channel.9')
     //     .listen('.comment_event', (e) => {
     //         console.log(e);
     // });

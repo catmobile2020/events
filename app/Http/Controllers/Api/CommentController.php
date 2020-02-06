@@ -184,7 +184,7 @@ class CommentController extends Controller
 
     /**
      *
-     * @SWG\delete(
+     * @SWG\Delete(
      *      tags={"comments"},
      *      path="/events/{post}/comments/{comment}",
      *      summary="destroy Post comment",
